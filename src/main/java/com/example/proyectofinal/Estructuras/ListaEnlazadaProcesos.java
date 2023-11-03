@@ -3,6 +3,9 @@ package com.example.proyectofinal.Estructuras;
 import com.example.proyectofinal.Actividad;
 import com.example.proyectofinal.Proceso;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ListaEnlazadaProcesos {
 
     public NodoProceso Cabeza;
@@ -35,40 +38,41 @@ public class ListaEnlazadaProcesos {
         NodoProceso actual = Cabeza;
 
         while (actual != null) {
-            System.out.print("ID Proceso: "+ actual.getProceso().getId()+" -- Nombre Proceso: "+actual.getProceso().getNombre()); // Suponiendo que T tiene un método toString() adecuado
+            System.out.print("ID Proceso: "+ actual.getProceso().getId()+" -- Nombre Proceso: "+actual.getProceso().getNombre()+"\n"); // Suponiendo que T tiene un método toString() adecuado
             actual = actual.getSiguiente();
         }
 
         System.out.println(); // Para imprimir un salto de línea al final
     }
 
-    public Actividad buscarActividad(String nombreActividad) {
+    public ArrayList<Actividad>buscarActividad(String nombreActividad) {
+        ArrayList<Actividad> actividadesEncontradas = new ArrayList<>();
         NodoProceso actual = Cabeza;
+
         while (actual != null) {
-            Actividad actividad = buscarActividadEnProceso(actual.getProceso() , nombreActividad);
-            if (actividad != null) {
-                System.out.println(actividad);
-                return actividad;
-            }
+            actividadesEncontradas.addAll(buscarActividadEnProceso(actual.getProceso(), nombreActividad));
             actual = actual.siguiente;
         }
-        System.out.println("No se encontro");
-        return null;
+
+        System.out.println(actividadesEncontradas);
+        return actividadesEncontradas;
     }
 
-    private Actividad buscarActividadEnProceso(Proceso proceso, String nombreActividad) {
-
+    private ArrayList<Actividad> buscarActividadEnProceso(Proceso proceso, String nombreActividad) {
+        ArrayList<Actividad> actividadesEncontradas = new ArrayList<>();
         ListaEnlazadaActividades listaActividades = proceso.getListaEnlazadaActividades();
+
         NodoActividad actual = listaActividades.getCabeza();
 
         while (actual != null) {
             if (actual.getActividad().getNombre().equals(nombreActividad)) {
-                System.out.println("Actividad : "+ actual.getActividad().getNombre()+" -- "+actual.getActividad().getDescripcion()+"\n");
-                return actual.getActividad();
+                System.out.println("Proceso ID: "+proceso.getId());
+                actual.getActividad().ImpresionDetalles();
+                actividadesEncontradas.add(actual.getActividad());
             }
             actual = actual.getSiguiente();
         }
-        System.out.println("No hay actividad");
-        return null;
+
+        return actividadesEncontradas;
     }
 }

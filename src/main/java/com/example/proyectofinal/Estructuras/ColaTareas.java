@@ -5,7 +5,8 @@ import com.example.proyectofinal.Tarea;
 public class ColaTareas {
 
     public NodoTarea nodoPrimero, nodoUltimo;
-    private int tamanio;
+    public int tamanio;
+    public int DuracionTotal;
 
     /**
      * Agrega un elemento en la Cola
@@ -23,6 +24,7 @@ public class ColaTareas {
             nodoUltimo = nodo;
         }
 
+        DuracionTotal += nodo.getTarea().getDuracion();
         tamanio++;
     }
 
@@ -42,8 +44,10 @@ public class ColaTareas {
         if (posicion == 0) {
             nuevoNodo.setSiguiente(nodoPrimero);
             nodoPrimero = nuevoNodo;
+            DuracionTotal += nuevoNodo.getTarea().getDuracion();
             if (estaVacia()) {
                 nodoUltimo = nuevoNodo;
+                DuracionTotal += nuevoNodo.getTarea().getDuracion();
             }
         } else if (posicion == tamanio) {
             encolar(dato); // Si la posición es igual al tamaño, simplemente encolamos el elemento.
@@ -57,6 +61,8 @@ public class ColaTareas {
             anterior.setSiguiente(nuevoNodo);
             nuevoNodo.setSiguiente(siguiente);
             tamanio++;
+            DuracionTotal += nuevoNodo.getTarea().getDuracion();
+
         }
     }
 
@@ -105,9 +111,11 @@ public class ColaTareas {
 
         while (nodoActual != null) {
             System.out.print(nodoActual.getTarea().getDuracion() + " min : " + nodoActual.getTarea().getDescripcion() +  "\n"); // Suponiendo que Tarea tiene un método toString() adecuado
+
             nodoActual = nodoActual.getSiguiente();
         }
 
+        System.out.println("Duracion Total: "+DuracionTotal);
         System.out.println(); // Para imprimir un salto de línea al final
     }
 }

@@ -53,8 +53,12 @@ public class Actividad {
     }
 
     public void ImprimirTareas (){
-
         Tareas.imprimirCola();
+    }
 
+    public void ImpresionDetalles (){
+        System.out.println("Actividad: "+Nombre+ " -- "+Descripcion+" \n" );
+        System.out.println("Tareas: ");
+        ImprimirTareas();
     }
 }

@@ -1,12 +1,10 @@
 package com.example.proyectofinal;
 
-import java.time.Duration;
-
 public class Tarea {
 
-    private String Descripcion;
-    private Boolean Obligatorio;
-    private int Duracion;
+    public String Descripcion;
+    public Boolean Obligatorio;
+    public int Duracion;
 
     public Tarea (String Descripcion, Boolean Obligatorio, int Duracion){
 

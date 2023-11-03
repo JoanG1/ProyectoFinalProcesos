@@ -1,8 +1,10 @@
 package com.example.proyectofinal.Estructuras;
 
-public class ColaTareas<Tarea> {
+import com.example.proyectofinal.Tarea;
 
-    public NodoTarea<Tarea> nodoPrimero, nodoUltimo;
+public class ColaTareas {
+
+    public NodoTarea nodoPrimero, nodoUltimo;
     private int tamanio;
 
     /**
@@ -12,7 +14,7 @@ public class ColaTareas<Tarea> {
      */
     public void encolar(Tarea dato) {
 
-        NodoTarea<Tarea> nodo = new NodoTarea<>(dato);
+        NodoTarea nodo = new NodoTarea(dato);
 
         if (estaVacia()) {
             nodoPrimero = nodoUltimo = nodo;
@@ -35,7 +37,7 @@ public class ColaTareas<Tarea> {
             throw new IllegalArgumentException("Posición inválida");
         }
 
-        NodoTarea<Tarea> nuevoNodo = new NodoTarea<>(dato);
+        NodoTarea nuevoNodo = new NodoTarea(dato);
 
         if (posicion == 0) {
             nuevoNodo.setSiguiente(nodoPrimero);
@@ -46,11 +48,11 @@ public class ColaTareas<Tarea> {
         } else if (posicion == tamanio) {
             encolar(dato); // Si la posición es igual al tamaño, simplemente encolamos el elemento.
         } else {
-            NodoTarea<Tarea> anterior = nodoPrimero;
+            NodoTarea anterior = nodoPrimero;
             for (int i = 0; i < posicion - 1; i++) {
                 anterior = anterior.getSiguiente();
             }
-            NodoTarea<Tarea> siguiente = anterior.getSiguiente();
+            NodoTarea siguiente = anterior.getSiguiente();
 
             anterior.setSiguiente(nuevoNodo);
             nuevoNodo.setSiguiente(siguiente);
@@ -78,14 +80,14 @@ public class ColaTareas<Tarea> {
     /**
      * @return the primero
      */
-    public NodoTarea<Tarea> getPrimero() {
+    public NodoTarea getPrimero() {
         return nodoPrimero;
     }
 
     /**
      * @return the ultimo
      */
-    public NodoTarea<Tarea> getUltimo() {
+    public NodoTarea getUltimo() {
         return nodoUltimo;
     }
 
@@ -94,5 +96,18 @@ public class ColaTareas<Tarea> {
      */
     public int getTamano() {
         return tamanio;
+    }
+
+    public void imprimirCola (){
+
+        NodoTarea nodoActual = nodoPrimero;
+
+
+        while (nodoActual != null) {
+            System.out.print(nodoActual.getTarea().getDuracion() + " min : " + nodoActual.getTarea().getDescripcion() +  " "); // Suponiendo que Tarea tiene un método toString() adecuado
+            nodoActual = nodoActual.getSiguiente();
+        }
+
+        System.out.println(); // Para imprimir un salto de línea al final
     }
 }

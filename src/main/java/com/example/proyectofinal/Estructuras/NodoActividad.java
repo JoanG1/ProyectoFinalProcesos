@@ -1,18 +1,17 @@
 package com.example.proyectofinal.Estructuras;
 
+import com.example.proyectofinal.Actividad;
 import com.example.proyectofinal.Tarea;
 
-public class NodoActividad<Actividad> {
+public class NodoActividad {
 
-    private NodoActividad<Actividad> siguiente ;
+    private NodoActividad siguiente ;
     private Actividad Actividad;
-    private ColaTareas<Tarea> Tareas;
 
-    public NodoActividad (Actividad Actividad , ColaTareas<Tarea> Tareas){
+    public NodoActividad (Actividad Actividad , ColaTareas Tareas){
 
         this.Actividad = Actividad;
         this.siguiente = null;
-        this.Tareas = Tareas;
 
     }
 
@@ -20,7 +19,6 @@ public class NodoActividad<Actividad> {
 
         this.Actividad = Actividad;
         this.siguiente = null;
-        this.Tareas = null;
 
     }
 
@@ -29,11 +27,11 @@ public class NodoActividad<Actividad> {
     //METODOS GETTERS Y SETTERS
 
 
-    public NodoActividad<Actividad> getSiguiente() {
+    public NodoActividad getSiguiente() {
         return siguiente;
     }
 
-    public void setSiguiente(NodoActividad<Actividad> siguiente) {
+    public void setSiguiente(NodoActividad siguiente) {
         this.siguiente = siguiente;
     }
 
@@ -45,11 +43,4 @@ public class NodoActividad<Actividad> {
         Actividad = actividad;
     }
 
-    public ColaTareas getTareas() {
-        return Tareas;
-    }
-
-    public void setTareas(ColaTareas tareas) {
-        Tareas = tareas;
-    }
 }

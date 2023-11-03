@@ -1,12 +1,19 @@
 package com.example.proyectofinal.Estructuras;
 
-public class NodoTarea<Tarea> {
+import com.example.proyectofinal.Tarea;
 
-    private Tarea Tarea;
-    private NodoTarea<Tarea> Siguiente;
+public class NodoTarea {
+
+    public Tarea Tarea;
+    public NodoTarea Siguiente;
 
     public NodoTarea (Tarea Tarea){
         this.Tarea = Tarea;
+        this.Siguiente = null;
+    }
+
+    public NodoTarea (){
+        this.Tarea = null;
         this.Siguiente = null;
     }
 
@@ -21,11 +28,11 @@ public class NodoTarea<Tarea> {
         Tarea = tarea;
     }
 
-    public NodoTarea<Tarea> getSiguiente() {
+    public NodoTarea getSiguiente() {
         return Siguiente;
     }
 
-    public void setSiguiente(NodoTarea<Tarea> siguiente) {
+    public void setSiguiente(NodoTarea siguiente) {
         Siguiente = siguiente;
     }
 }

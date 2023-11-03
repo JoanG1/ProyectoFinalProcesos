@@ -1,10 +1,13 @@
 package com.example.proyectofinal;
 
+import com.example.proyectofinal.Estructuras.ColaTareas;
+
 public class Actividad {
 
     private String Nombre;
     private String Descripcion;
     private boolean Obligatorio;
+    private ColaTareas Tareas = new ColaTareas();
 
     public Actividad (String Nombre, String Descripcion, boolean Obligatorio ){
 
@@ -39,5 +42,19 @@ public class Actividad {
 
     public void setObligatorio(boolean obligatorio) {
         Obligatorio = obligatorio;
+    }
+
+    public ColaTareas getTareas() {
+        return Tareas;
+    }
+
+    public void setTareas(ColaTareas tareas) {
+        Tareas = tareas;
+    }
+
+    public void ImprimirTareas (){
+
+        Tareas.imprimirCola();
+
     }
 }

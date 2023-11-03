@@ -104,7 +104,7 @@ public class ColaTareas {
 
 
         while (nodoActual != null) {
-            System.out.print(nodoActual.getTarea().getDuracion() + " min : " + nodoActual.getTarea().getDescripcion() +  " "); // Suponiendo que Tarea tiene un método toString() adecuado
+            System.out.print(nodoActual.getTarea().getDuracion() + " min : " + nodoActual.getTarea().getDescripcion() +  "\n"); // Suponiendo que Tarea tiene un método toString() adecuado
             nodoActual = nodoActual.getSiguiente();
         }
 

@@ -2,11 +2,49 @@ package com.example.proyectofinal;
 
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class HelloController {
     @FXML
     private Label welcomeText;
+    @FXML
+    private Button ImportarProyecto;
+    @FXML
+    private Button NuevoProyecto;
+    @FXML
+    private Button BuscarProceso;
+    @FXML
+    private Button CrearProceso;
+    @FXML
+    private TableView ListaProcesos;
+    @FXML
+    private TableColumn columnaNombreProceso;
+    @FXML
+    private TableColumn columnaIdProcesos;
+    @FXML
+    private Button CrearActividad;
+    @FXML
+    private Button BuscarActividad;
+    @FXML
+    private TableView ListaActividades;
+    @FXML
+    private TableColumn columnaNombreActividad;
+    @FXML
+    private TableColumn columnaIdActividad;
+    @FXML
+    private Button CrearTarea;
+    @FXML
+    private Button BuscarTarea;
+    @FXML
+    private TableView ListadoTareas;
+    @FXML
+    private TableColumn columnaNombreTareas;
+    @FXML
+    private TableColumn columnaIdTareas;
+
 
     @FXML
     protected void onHelloButtonClick() {
@@ -60,5 +98,49 @@ public class HelloController {
         listaProcesos.buscarTareaEnProcesos("", "","Desconectar cables");
 
         proceso.getListaEnlazadaActividades().buscarTareaEnActividad("Analisis","Limpiar Componentes");
+    }
+
+    @FXML
+
+    protected void CrearNuevoProyecto (){
+
+    }
+
+    @FXML
+
+    protected void ImportarProyecto (){
+
+    }
+    @FXML
+
+    protected void BuscarProceso (){
+
+    }
+    @FXML
+
+    protected void CrearNuevoProceso (){
+
+    }
+    @FXML
+
+    protected void CrearNuevaActividad (){
+
+    }
+
+    @FXML
+
+    protected void BuscarActividad (){
+
+    }
+
+    @FXML
+
+    protected void BuscarTarea (){
+
+    }
+    @FXML
+
+    protected void CrearNuevaTarea (){
+
     }
 }

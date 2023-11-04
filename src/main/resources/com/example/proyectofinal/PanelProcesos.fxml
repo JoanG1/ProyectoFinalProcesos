@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
+         <children>
+            <Button fx:id="NuevoProyecto" layoutX="212.0" layoutY="142.0" mnemonicParsing="false" onAction="#CrearNuevoProyecto" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nuevo Proyecto" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="ImportarProyecto" layoutX="226.0" layoutY="216.0" mnemonicParsing="false" onAction="#ImportarProyecto" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Importar Proyecto" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="103.0" layoutY="39.0" text="Sistema de creacion de procesos" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
+         <children>
+            <Label layoutX="168.0" layoutY="41.0" text="Creacion de procesos" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="BuscarProceso" layoutX="76.0" layoutY="200.0" mnemonicParsing="false" onAction="#BuscarProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Proceso" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <TableView fx:id="ListaProcesos" layoutX="314.0" layoutY="100.0" prefHeight="200.0" prefWidth="239.0">
+              <columns>
+                <TableColumn fx:id="columnaNombreProceso" prefWidth="143.0" style="-fx-background-color: gray;" text="Nombre Proceso" />
+                <TableColumn fx:id="columnaIdProcesos" prefWidth="95.0" style="-fx-background-color: gray;" text="ID" />
+              </columns>
+            </TableView>
+            <Button fx:id="CrearProceso" layoutX="55.0" layoutY="153.0" mnemonicParsing="false" onAction="#CrearNuevoProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nuevo Proceso" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
+         <children>
+            <Label layoutX="152.0" layoutY="42.0" text="Creacion de Actividades" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="CrearActividad" layoutX="62.0" layoutY="158.0" mnemonicParsing="false" onAction="#CrearNuevaActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nueva Actividad" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="BuscarActividad" layoutX="83.0" layoutY="220.0" mnemonicParsing="false" onAction="#BuscarActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <TableView fx:id="ListaActividades" layoutX="310.0" layoutY="100.0" prefHeight="200.0" prefWidth="239.0">
+               <columns>
+                  <TableColumn fx:id="columnaNombreActividad" prefWidth="143.0" style="-fx-background-color: gray;" text="Nombre Proceso" />
+                  <TableColumn fx:id="columnaIdActividad" prefWidth="95.0" style="-fx-background-color: gray;" text="ID" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;">
+         <children>
+            <TableView fx:id="ListadoTareas" layoutX="310.0" layoutY="106.0" prefHeight="200.0" prefWidth="239.0">
+               <columns>
+                  <TableColumn fx:id="columnaNombreTareas" prefWidth="143.0" style="-fx-background-color: gray;" text="Nombre Proceso" />
+                  <TableColumn fx:id="columnaIdTareas" prefWidth="95.0" style="-fx-background-color: gray;" text="ID" />
+               </columns>
+            </TableView>
+            <Label layoutX="193.0" layoutY="41.0" text="Creacion de Tareas" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="CrearTarea" layoutX="77.0" layoutY="143.0" mnemonicParsing="false" onAction="#CrearNuevaTarea" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nueva Tarea" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="BuscarTarea" layoutX="98.0" layoutY="220.0" mnemonicParsing="false" onAction="#BuscarTarea" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,15 +1,29 @@
 package com.example.proyectofinal;
 
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
+    //Variables Clases
+
+    private ListaEnlazadaProcesos listaProcesos;
+
+    private int IdProcesos = 0;
+
+    private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
+
+    private TableColumn<Proceso, String> colApellido = new TableColumn<>("Id");
+
+
+
+    //Variables UI
+
     @FXML
     private Button ImportarProyecto;
     @FXML
@@ -19,11 +33,15 @@ public class HelloController {
     @FXML
     private Button CrearProceso;
     @FXML
-    private TableView ListaProcesos;
+    private TableView<Proceso> ListaProcesos;
     @FXML
-    private TableColumn columnaNombreProceso;
+    private TableColumn<Proceso,String> columnaNombreProceso;
     @FXML
-    private TableColumn columnaIdProcesos;
+    private TableColumn<Proceso,String> columnaIdProcesos;
+
+    @FXML
+    private TableColumn<Proceso,String> columnax;
+
     @FXML
     private Button CrearActividad;
     @FXML
@@ -44,9 +62,26 @@ public class HelloController {
     private TableColumn columnaNombreTareas;
     @FXML
     private TableColumn columnaIdTareas;
+    @FXML
+    private AnchorPane PanelPrincipal;
+    @FXML
+    private AnchorPane PanelProcesos;
+      @FXML
+      private AnchorPane PanelCrearProceso;
+      @FXML
+      private TextField TextFieldNombreProceso;
+      @FXML
+      private Button CreacionProceso;
 
 
     @FXML
+    private AnchorPane PanelActividades;
+    @FXML
+    private AnchorPane PanelTareas;
+
+
+
+    /*@FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
 
@@ -99,10 +134,21 @@ public class HelloController {
 
         proceso.getListaEnlazadaActividades().buscarTareaEnActividad("Analisis","Limpiar Componentes");
     }
+    */
 
     @FXML
 
     protected void CrearNuevoProyecto (){
+
+        listaProcesos = new ListaEnlazadaProcesos();
+        PanelPrincipal.setVisible(false);
+        PanelProcesos.setVisible(true);
+        ListaProcesos.getColumns().addAll(colNombre,colApellido);
+
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        colApellido.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+
 
     }
 
@@ -119,6 +165,22 @@ public class HelloController {
     @FXML
 
     protected void CrearNuevoProceso (){
+
+        PanelCrearProceso.setVisible(true);
+
+
+    }
+
+    @FXML
+
+    protected void CreacionDeProceso (){
+
+        listaProcesos = new ListaEnlazadaProcesos();
+        listaProcesos.insertar(new Proceso(IdProcesos,TextFieldNombreProceso.getText()));
+        listaProcesos.imprimirLista();
+        PanelCrearProceso.setVisible(false);
+        ListaProcesos.getItems().add(listaProcesos.getCabeza().getProceso());
+
 
     }
     @FXML

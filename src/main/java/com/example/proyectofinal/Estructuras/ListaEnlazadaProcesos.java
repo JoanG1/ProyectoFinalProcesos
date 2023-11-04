@@ -2,6 +2,7 @@ package com.example.proyectofinal.Estructuras;
 
 import com.example.proyectofinal.Actividad;
 import com.example.proyectofinal.Proceso;
+import com.example.proyectofinal.Tarea;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -54,7 +55,6 @@ public class ListaEnlazadaProcesos {
             actual = actual.siguiente;
         }
 
-        System.out.println(actividadesEncontradas);
         return actividadesEncontradas;
     }
 
@@ -74,5 +74,51 @@ public class ListaEnlazadaProcesos {
         }
 
         return actividadesEncontradas;
+    }
+
+    public Tarea buscarTareaEnProcesos(String nombreProceso, String nombreActividad, String nombreTarea) {
+        NodoProceso actual = Cabeza;
+
+        while (actual != null) {
+            if (actual.getProceso().getNombre().equals(nombreProceso)||nombreProceso.equals("")) {
+
+                ColaTareas colaTareas = actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getTareas();
+
+                if (actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre().equals(nombreActividad)||nombreActividad.equals("")) {
+                    NodoTarea tareaActual = colaTareas.nodoPrimero;
+                    while (tareaActual != null) {
+                        if (tareaActual.getTarea().getDescripcion().equals(nombreTarea)) {
+
+
+                            System.out.println("Proceso Padre: "+actual.getProceso().getNombre()+"\n"+"Actividad Padre:"+actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre()+"\n"+"Tarea: "+tareaActual.getTarea().Descripcion);
+                            return tareaActual.getTarea();
+                        }
+                        tareaActual = tareaActual.getSiguiente();
+                    }
+                }
+            }
+            actual = actual.siguiente;
+        }
+
+        return null; // Retorna null si no se encuentra la tarea
+    }
+
+    //METODODS GETTERS Y SETTERS
+
+
+    public NodoProceso getCabeza() {
+        return Cabeza;
+    }
+
+    public void setCabeza(NodoProceso cabeza) {
+        Cabeza = cabeza;
+    }
+
+    public int getTamanio() {
+        return Tamanio;
+    }
+
+    public void setTamanio(int tamanio) {
+        Tamanio = tamanio;
     }
 }

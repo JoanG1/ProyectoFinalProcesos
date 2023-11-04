@@ -120,4 +120,32 @@ public class ListaEnlazadaActividades {
     public void setUltimoIngreso(String ultimoIngreso) {
         UltimoIngreso = ultimoIngreso;
     }
+
+    public Tarea buscarTareaEnActividad (String NombreActividad, String NombreTarea){
+        NodoActividad actual = Cabeza;
+
+        while (actual.getSiguiente() != null){
+
+            if (actual.getActividad().getNombre().equals(NombreActividad)) {
+                ColaTareas tareas = actual.getActividad().getTareas();
+                NodoTarea tareaActual = tareas.nodoPrimero;
+
+                while (tareaActual!= null) {
+                    if (tareaActual.getTarea().getDescripcion().equals(NombreTarea)) {
+
+                        System.out.println("");
+                        System.out.println("Actividad: "+Cabeza.getActividad().getNombre() + "\n" + "Tarea: " + tareaActual.getTarea().Descripcion+"\n"+"Duracion: "+tareaActual.getTarea().getDuracion()+"min");
+                        return tareaActual.getTarea();
+                    }
+
+                    tareaActual = tareaActual.getSiguiente();
+                }
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        return null;
+    }
 }
+

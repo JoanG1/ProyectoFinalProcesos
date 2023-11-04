@@ -30,6 +30,8 @@ public class HelloController {
         Tarea tarea3 = new Tarea("Conectar Componentes", true, 15);
         Tarea tarea4 = new Tarea("Limpiar Componentes", true, 30);
 
+        Tarea tarea5 = new Tarea("Desconectar cables", true,20);
+
 
         proceso.getListaEnlazadaActividades().insertar(actividad);
         proceso.getListaEnlazadaActividades().insertar(actividad2);
@@ -44,11 +46,19 @@ public class HelloController {
         actividad.getTareas().insertarEnPosicion(tarea3, 2);
         actividad.getTareas().insertarEnPosicion(tarea4, 2);
 
+        actividad5.getTareas().encolar(tarea5);
+
         listaProcesos.insertar(proceso);
         listaProcesos.insertar(proceso1);
 
         listaProcesos.imprimirLista();
 
         listaProcesos.buscarActividad("Desarmar");
+
+        //listaProcesos.buscarTareaEnProcesos("Mantenimiento pc","Analisis","Desarmar dispositivo");
+
+        listaProcesos.buscarTareaEnProcesos("", "","Desconectar cables");
+
+        proceso.getListaEnlazadaActividades().buscarTareaEnActividad("Analisis","Limpiar Componentes");
     }
 }

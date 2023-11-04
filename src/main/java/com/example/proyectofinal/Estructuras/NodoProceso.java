@@ -22,7 +22,7 @@ public class NodoProceso {
         Proceso = proceso;
     }
 
-    public NodoProceso getSiguiente() {
+    public NodoProceso getSiguiente(){
         return siguiente;
     }
 

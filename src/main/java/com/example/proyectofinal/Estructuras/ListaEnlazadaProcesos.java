@@ -12,8 +12,6 @@ public class ListaEnlazadaProcesos {
     public NodoProceso Cabeza;
     public int Tamanio;
 
-
-
     public ListaEnlazadaProcesos (){
 
         this.Cabeza = null;
@@ -74,6 +72,24 @@ public class ListaEnlazadaProcesos {
         }
 
         return actividadesEncontradas;
+    }
+
+    public ListaEnlazadaActividades ListaDeActividadesDeProceso (String Proceso){
+
+        ListaEnlazadaActividades ListaActividades = new ListaEnlazadaActividades();
+        NodoProceso Actual = Cabeza;
+
+        while (Actual!=null){
+
+            if(Actual.getProceso().getNombre().equals(Proceso)) {
+
+                return Actual.getProceso().getListaEnlazadaActividades();
+            }
+
+            Actual = Actual.getSiguiente();
+        }
+
+        return null;
     }
 
     public Tarea buscarTareaEnProcesos(String nombreProceso, String nombreActividad, String nombreTarea) {

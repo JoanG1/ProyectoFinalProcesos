@@ -1,5 +1,6 @@
 package com.example.proyectofinal;
 
+import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,11 +15,17 @@ public class HelloController {
 
     private ListaEnlazadaProcesos listaProcesos;
 
+    private ListaEnlazadaActividades listaActividades;
+
     private int IdProcesos = 0;
 
     private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
-
     private TableColumn<Proceso, String> colApellido = new TableColumn<>("Id");
+
+    private TableColumn<Actividad, String> colNombreActividad = new TableColumn<>("Nombre");
+    private TableColumn<Actividad, String> colDescripcionActividad = new TableColumn<>("Descripcion");
+    private TableColumn<Actividad, Boolean> colObligatorio = new TableColumn<>("Obligatorio");
+
 
 
 
@@ -32,6 +39,8 @@ public class HelloController {
     private Button BuscarProceso;
     @FXML
     private Button CrearProceso;
+    @FXML
+    private Button ActividadesEnProceso;
     @FXML
     private TableView<Proceso> ListaProcesos;
     @FXML
@@ -47,11 +56,7 @@ public class HelloController {
     @FXML
     private Button BuscarActividad;
     @FXML
-    private TableView ListaActividades;
-    @FXML
-    private TableColumn columnaNombreActividad;
-    @FXML
-    private TableColumn columnaIdActividad;
+    private TableView<Actividad> ListaActividades;
     @FXML
     private Button CrearTarea;
     @FXML
@@ -76,6 +81,20 @@ public class HelloController {
 
     @FXML
     private AnchorPane PanelActividades;
+      @FXML
+      private AnchorPane PanelFiltroActividad;
+      @FXML
+      private Button EntrarActividad;
+      @FXML
+      private TextField FiltroProceso;
+      @FXML
+      private AnchorPane PanelCrearActividad;
+      @FXML
+      private Button CreacionActividad;
+
+
+
+
     @FXML
     private AnchorPane PanelTareas;
 
@@ -148,8 +167,6 @@ public class HelloController {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         colApellido.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-
-
     }
 
     @FXML
@@ -167,25 +184,37 @@ public class HelloController {
     protected void CrearNuevoProceso (){
 
         PanelCrearProceso.setVisible(true);
+        ListaActividades.getColumns().addAll(colNombreActividad,colDescripcionActividad,colObligatorio);
 
+        colNombreActividad.setCellValueFactory(new PropertyValueFactory<>("Nombre Actividad"));
+        colDescripcionActividad.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        colObligatorio.setCellValueFactory(new PropertyValueFactory<>("Obligatorio"));
 
     }
 
     @FXML
 
-    protected void CreacionDeProceso (){
+    protected void CreacionDeProceso () {
 
-        listaProcesos = new ListaEnlazadaProcesos();
-        listaProcesos.insertar(new Proceso(IdProcesos,TextFieldNombreProceso.getText()));
+        listaProcesos.insertar(new Proceso(IdProcesos, TextFieldNombreProceso.getText()));
         listaProcesos.imprimirLista();
         PanelCrearProceso.setVisible(false);
         ListaProcesos.getItems().add(listaProcesos.getCabeza().getProceso());
+        IdProcesos++;
+        TextFieldNombreProceso.clear();
 
+    }
 
+    @FXML
+    protected void CreacionDeActividad (){
+
+        PanelCrearActividad.setVisible(false);
     }
     @FXML
 
     protected void CrearNuevaActividad (){
+
+        PanelCrearActividad.setVisible(true);
 
     }
 
@@ -203,6 +232,25 @@ public class HelloController {
     @FXML
 
     protected void CrearNuevaTarea (){
+
+    }
+
+    @FXML
+
+    protected void PasarActividades () {
+
+        PanelProcesos.setVisible(false);
+        PanelActividades.setVisible(true);
+        PanelFiltroActividad.setVisible(true);
+    }
+
+    @FXML
+
+    protected void EntrarActividades () {
+
+        PanelFiltroActividad.setVisible(false);
+        listaActividades = listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText());
+        //listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText()).imprimirLista();
 
     }
 }

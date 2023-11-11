@@ -89,6 +89,23 @@ public class HelloController {
       private TextField FiltroProceso;
       @FXML
       private AnchorPane PanelCrearActividad;
+        @FXML
+        private TextField NombreActividad ;
+        @FXML
+        private TextField DescripcionActividad ;
+        @FXML
+        private CheckBox ObligatorioActividad ;
+        @FXML
+        private CheckBox MetodoInsercionNormal ;
+        @FXML
+        private CheckBox MetodoDespuesActividad ;
+        @FXML
+        private CheckBox MetodoUltimoIngreso ;
+        @FXML
+        private TextField ActividadPrecede ;
+        @FXML
+        private Label error ;
+
       @FXML
       private Button CreacionActividad;
 
@@ -165,7 +182,17 @@ public class HelloController {
         ListaProcesos.getColumns().addAll(colNombre,colApellido);
 
         colNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        colNombre.setPrefWidth(170);
         colApellido.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        ListaActividades.getColumns().addAll(colNombreActividad,colDescripcionActividad,colObligatorio);
+
+        colNombreActividad.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        colNombreActividad.setPrefWidth(170);
+        colDescripcionActividad.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        colDescripcionActividad.setPrefWidth(200);
+        colObligatorio.setCellValueFactory(new PropertyValueFactory<>("Obligatorio"));
+        colObligatorio.setPrefWidth(170);
 
     }
 
@@ -184,22 +211,17 @@ public class HelloController {
     protected void CrearNuevoProceso (){
 
         PanelCrearProceso.setVisible(true);
-        ListaActividades.getColumns().addAll(colNombreActividad,colDescripcionActividad,colObligatorio);
-
-        colNombreActividad.setCellValueFactory(new PropertyValueFactory<>("Nombre Actividad"));
-        colDescripcionActividad.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
-        colObligatorio.setCellValueFactory(new PropertyValueFactory<>("Obligatorio"));
-
     }
 
     @FXML
 
     protected void CreacionDeProceso () {
 
-        listaProcesos.insertar(new Proceso(IdProcesos, TextFieldNombreProceso.getText()));
+        Proceso nuevoProceso = new Proceso(IdProcesos, TextFieldNombreProceso.getText());
+        listaProcesos.insertar(nuevoProceso);
         listaProcesos.imprimirLista();
         PanelCrearProceso.setVisible(false);
-        ListaProcesos.getItems().add(listaProcesos.getCabeza().getProceso());
+        ListaProcesos.getItems().add(nuevoProceso);
         IdProcesos++;
         TextFieldNombreProceso.clear();
 
@@ -208,7 +230,51 @@ public class HelloController {
     @FXML
     protected void CreacionDeActividad (){
 
-        PanelCrearActividad.setVisible(false);
+        Actividad nuevaActividad = new Actividad(NombreActividad.getText(),DescripcionActividad.getText(),ObligatorioActividad.isSelected());
+        if(MetodoInsercionNormal.isSelected()){
+
+            listaActividades.insertar(nuevaActividad);
+            listaActividades.imprimirLista();
+            ListaActividades.getItems().add(nuevaActividad);
+            NombreActividad.clear();
+            DescripcionActividad.clear();
+            ObligatorioActividad.setSelected(false);
+            PanelCrearActividad.setVisible(false);
+            ActividadPrecede.clear();
+            MetodoInsercionNormal.setSelected(false);
+        }
+        else if (MetodoDespuesActividad.isSelected()){
+
+            if(ActividadPrecede.getText() != null){
+
+                listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
+                listaActividades.imprimirLista();
+                ListaActividades.getItems().add(nuevaActividad);
+                NombreActividad.clear();
+                DescripcionActividad.clear();
+                ObligatorioActividad.setSelected(false);
+                PanelCrearActividad.setVisible(false);
+                ActividadPrecede.clear();
+                MetodoDespuesActividad.setSelected(false);
+
+
+            }else{
+                error.setText("Debe de ingresar una actividad previa para insertar");
+            }
+        } else if (MetodoUltimoIngreso.isSelected()) {
+
+            listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
+            listaActividades.imprimirLista();
+            ListaActividades.getItems().add(nuevaActividad);
+            NombreActividad.clear();
+            DescripcionActividad.clear();
+            ObligatorioActividad.setSelected(false);
+            PanelCrearActividad.setVisible(false);
+            ActividadPrecede.clear();
+            MetodoDespuesActividad.setSelected(false);
+
+        }
+
     }
     @FXML
 

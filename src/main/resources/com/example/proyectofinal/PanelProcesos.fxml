@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
    <children>
       <AnchorPane fx:id="PanelPrincipal" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;">
          <children>
@@ -76,17 +76,17 @@
                   <Font name="Rockwell" size="26.0" />
                </font>
             </Label>
-            <Button fx:id="CrearActividad" layoutX="62.0" layoutY="158.0" mnemonicParsing="false" onAction="#CrearNuevaActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nueva Actividad" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="CrearActividad" layoutX="62.0" layoutY="334.0" mnemonicParsing="false" onAction="#CrearNuevaActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nueva Actividad" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarActividad" layoutX="83.0" layoutY="220.0" mnemonicParsing="false" onAction="#BuscarActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarActividad" layoutX="380.0" layoutY="334.0" mnemonicParsing="false" onAction="#BuscarActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <TableView fx:id="ListaActividades" layoutX="310.0" layoutY="100.0" prefHeight="200.0" prefWidth="239.0" />
+            <TableView fx:id="ListaActividades" layoutX="40.0" layoutY="100.0" prefHeight="200.0" prefWidth="521.0" />
             <AnchorPane fx:id="PanelFiltroActividad" layoutX="192.0" layoutY="150.0" prefHeight="120.0" prefWidth="235.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
                <children>
                   <TextField fx:id="FiltroProceso" layoutX="115.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" />
@@ -94,15 +94,24 @@
                   <Button fx:id="EntrarActividad" layoutX="49.0" layoutY="73.0" mnemonicParsing="false" onAction="#EntrarActividades" text="Listado de actividades" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PanelCrearActividad" layoutX="123.0" layoutY="100.0" prefHeight="200.0" prefWidth="354.0" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 20px;" visible="false">
+            <AnchorPane fx:id="PanelCrearActividad" layoutX="44.0" layoutY="74.0" prefHeight="200.0" prefWidth="512.0" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 20px;" visible="false">
                <children>
-                  <TextField fx:id="NombreActividad" layoutX="192.0" layoutY="35.0" />
-                  <TextField fx:id="DescripcionActividad" layoutX="192.0" layoutY="74.0" />
-                  <Label layoutX="77.0" layoutY="39.0" text="Nombre" />
-                  <Label layoutX="77.0" layoutY="78.0" text="Descripcion" />
-                  <Label layoutX="77.0" layoutY="117.0" text="Obligatorio" />
-                  <CheckBox fx:id="ObligatorioActividad" layoutX="258.0" layoutY="117.0" mnemonicParsing="false" />
-                  <Button fx:id="CreacionActividad" layoutX="129.0" layoutY="152.0" mnemonicParsing="false" onAction="#CreacionDeActividad" text="Crear Actividad" />
+                  <TextField fx:id="NombreActividad" layoutX="90.0" layoutY="35.0" />
+                  <TextField fx:id="DescripcionActividad" layoutX="90.0" layoutY="74.0" />
+                  <Label layoutX="14.0" layoutY="39.0" text="Nombre" />
+                  <Label layoutX="14.0" layoutY="78.0" text="Descripcion" />
+                  <Label layoutX="15.0" layoutY="117.0" text="Obligatorio" />
+                  <CheckBox fx:id="ObligatorioActividad" layoutX="157.0" layoutY="117.0" mnemonicParsing="false" />
+                  <Button fx:id="CreacionActividad" layoutX="168.0" layoutY="154.0" mnemonicParsing="false" onAction="#CreacionDeActividad" text="Crear Actividad" />
+                  <Label layoutX="310.0" layoutY="14.0" text="Metodo" />
+                  <CheckBox fx:id="MetodoInsercionNormal" layoutX="380.0" layoutY="39.0" mnemonicParsing="false" />
+                  <CheckBox fx:id="MetodoDespuesActividad" layoutX="473.0" layoutY="70.0" mnemonicParsing="false" />
+                  <CheckBox fx:id="MetodoUltimoIngreso" layoutX="380.0" layoutY="100.0" mnemonicParsing="false" />
+                  <Label layoutX="277.0" layoutY="39.0" text="Insercion normal" />
+                  <Label layoutX="277.0" layoutY="100.0" text="Ultimo ingreso" />
+                  <Label layoutX="254.0" layoutY="70.0" text="Despues de actividad" />
+                  <TextField fx:id="ActividadPrecede" layoutX="380.0" layoutY="66.0" prefHeight="25.0" prefWidth="79.0" />
+                  <Label fx:id="error" layoutX="294.0" layoutY="158.0" prefHeight="17.0" prefWidth="16.0" textFill="RED" />
                </children>
             </AnchorPane>
          </children>

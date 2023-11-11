@@ -54,7 +54,7 @@ public class ListaEnlazadaActividades {
             actual = actual.getSiguiente();
         }
 
-        System.out.println("La actividad previa no se encontró en la lista.");
+        insertar(nuevaActividad);
     }
 
     public void imprimirLista() {

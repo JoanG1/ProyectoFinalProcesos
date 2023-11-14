@@ -9,6 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
+import java.util.Iterator;
+
 public class HelloController {
 
     //Variables Clases
@@ -234,8 +236,13 @@ public class HelloController {
         if(MetodoInsercionNormal.isSelected()){
 
             listaActividades.insertar(nuevaActividad);
+            Iterator<Actividad> iterator = listaActividades.iterator();
+            ListaActividades.getItems().clear();
             listaActividades.imprimirLista();
-            ListaActividades.getItems().add(nuevaActividad);
+            while (iterator.hasNext()){
+                Actividad actividad = iterator.next();
+                ListaActividades.getItems().add(actividad);
+            }
             NombreActividad.clear();
             DescripcionActividad.clear();
             ObligatorioActividad.setSelected(false);
@@ -248,8 +255,13 @@ public class HelloController {
             if(ActividadPrecede.getText() != null){
 
                 listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
+                Iterator<Actividad> iterator = listaActividades.iterator();
+                ListaActividades.getItems().clear();
                 listaActividades.imprimirLista();
-                ListaActividades.getItems().add(nuevaActividad);
+                while (iterator.hasNext()){
+                    Actividad actividad = iterator.next();
+                    ListaActividades.getItems().add(actividad);
+                }
                 NombreActividad.clear();
                 DescripcionActividad.clear();
                 ObligatorioActividad.setSelected(false);
@@ -264,8 +276,13 @@ public class HelloController {
         } else if (MetodoUltimoIngreso.isSelected()) {
 
             listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
+            Iterator<Actividad> iterator = listaActividades.iterator();
+            ListaActividades.getItems().clear();
             listaActividades.imprimirLista();
-            ListaActividades.getItems().add(nuevaActividad);
+            while (iterator.hasNext()){
+                Actividad actividad = iterator.next();
+                ListaActividades.getItems().add(actividad);
+            }
             NombreActividad.clear();
             DescripcionActividad.clear();
             ObligatorioActividad.setSelected(false);

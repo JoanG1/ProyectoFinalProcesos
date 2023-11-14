@@ -2,7 +2,9 @@ package com.example.proyectofinal.Estructuras;
 
 import com.example.proyectofinal.Tarea;
 
-public class ColaTareas {
+import java.util.Iterator;
+
+public class ColaTareas implements Iterable<Tarea> {
 
     public NodoTarea nodoPrimero, nodoUltimo;
     public int tamanio;
@@ -118,4 +120,34 @@ public class ColaTareas {
         System.out.println("Duracion Total: "+DuracionTotal);
         System.out.println(); // Para imprimir un salto de línea al final
     }
+
+
+    @Override
+    public Iterator<Tarea> iterator() {
+        return new TareaIterator();
+    }
+
+    private class TareaIterator implements Iterator<Tarea> {
+        private NodoTarea current = nodoPrimero;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Tarea next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            Tarea tarea = current.getTarea();
+            current = current.getSiguiente();
+            return tarea;
+        }
+
+        // Puedes implementar el método remove si lo necesitas, pero en este caso, no lo estamos utilizando.
+        // @Override
+        // public void remove() {
+        //     throw new UnsupportedOperationException();
+    }   // }
 }

@@ -6,8 +6,9 @@ import com.example.proyectofinal.Tarea;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class ListaEnlazadaProcesos {
+public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
     public NodoProceso Cabeza;
     public int Tamanio;
@@ -96,11 +97,11 @@ public class ListaEnlazadaProcesos {
         NodoProceso actual = Cabeza;
 
         while (actual != null) {
-            if (actual.getProceso().getNombre().equals(nombreProceso)||nombreProceso.equals("")) {
+            if (actual.getProceso().getNombre().equals(nombreProceso)||nombreProceso.isEmpty()) {
 
                 ColaTareas colaTareas = actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getTareas();
 
-                if (actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre().equals(nombreActividad)||nombreActividad.equals("")) {
+                if (actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre().equals(nombreActividad)||nombreActividad.isEmpty()) {
                     NodoTarea tareaActual = colaTareas.nodoPrimero;
                     while (tareaActual != null) {
                         if (tareaActual.getTarea().getDescripcion().equals(nombreTarea)) {
@@ -136,5 +137,35 @@ public class ListaEnlazadaProcesos {
 
     public void setTamanio(int tamanio) {
         Tamanio = tamanio;
+    }
+
+    @Override
+    public Iterator<Proceso> iterator() {
+        return new ProcesoIterator();
+    }
+
+    private class ProcesoIterator implements Iterator<Proceso> {
+        private NodoProceso current = Cabeza;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Proceso next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            Proceso proceso = current.getProceso();
+            current = current.getSiguiente();
+            return proceso;
+        }
+
+        // Puedes implementar el método remove si lo necesitas, pero en este caso, no lo estamos utilizando.
+        // @Override
+        // public void remove() {
+        //     throw new UnsupportedOperationException();
+        // }
     }
 }

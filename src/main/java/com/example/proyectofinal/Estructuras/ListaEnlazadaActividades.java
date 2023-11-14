@@ -3,15 +3,17 @@ package com.example.proyectofinal.Estructuras;
 import com.example.proyectofinal.Actividad;
 import com.example.proyectofinal.Tarea;
 
-public class ListaEnlazadaActividades {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class ListaEnlazadaActividades implements Iterable<Actividad> {
 
     public NodoActividad Cabeza;
     public int Tamanio;
     public String UltimoIngreso;
 
 
-
-    public ListaEnlazadaActividades (){
+    public ListaEnlazadaActividades() {
 
         this.Cabeza = null;
         this.Tamanio = 0;
@@ -61,7 +63,7 @@ public class ListaEnlazadaActividades {
         NodoActividad actual = Cabeza;
 
         while (actual != null) {
-            System.out.print("Actividad: "+ actual.getActividad().getNombre() +" -- "+ actual.getActividad().getDescripcion() + " \n"); // Suponiendo que T tiene un método toString() adecuado
+            System.out.print("Actividad: " + actual.getActividad().getNombre() + " -- " + actual.getActividad().getDescripcion() + " \n"); // Suponiendo que T tiene un método toString() adecuado
             actual = actual.getSiguiente();
         }
 
@@ -121,20 +123,20 @@ public class ListaEnlazadaActividades {
         UltimoIngreso = ultimoIngreso;
     }
 
-    public Tarea buscarTareaEnActividad (String NombreActividad, String NombreTarea){
+    public Tarea buscarTareaEnActividad(String NombreActividad, String NombreTarea) {
         NodoActividad actual = Cabeza;
 
-        while (actual.getSiguiente() != null){
+        while (actual.getSiguiente() != null) {
 
             if (actual.getActividad().getNombre().equals(NombreActividad)) {
                 ColaTareas tareas = actual.getActividad().getTareas();
                 NodoTarea tareaActual = tareas.nodoPrimero;
 
-                while (tareaActual!= null) {
+                while (tareaActual != null) {
                     if (tareaActual.getTarea().getDescripcion().equals(NombreTarea)) {
 
                         System.out.println("");
-                        System.out.println("Actividad: "+Cabeza.getActividad().getNombre() + "\n" + "Tarea: " + tareaActual.getTarea().Descripcion+"\n"+"Duracion: "+tareaActual.getTarea().getDuracion()+"min");
+                        System.out.println("Actividad: " + Cabeza.getActividad().getNombre() + "\n" + "Tarea: " + tareaActual.getTarea().Descripcion + "\n" + "Duracion: " + tareaActual.getTarea().getDuracion() + "min");
                         return tareaActual.getTarea();
                     }
 
@@ -147,5 +149,43 @@ public class ListaEnlazadaActividades {
 
         return null;
     }
+
+    @Override
+    public Iterator<Actividad> iterator() {
+        return new ListaIterator();
+    }
+
+    // Clase interna que implementa la interfaz Iterator
+    private class ListaIterator implements Iterator<Actividad> {
+        private NodoActividad actual;
+
+        private int posicion;
+
+        // Constructor del Iterator
+        public ListaIterator() {
+            this.actual = Cabeza;
+        }
+
+        // Método para verificar si hay un siguiente elemento
+        @Override
+        public boolean hasNext() {
+            return actual != null;
+        }
+
+        // Método para obtener el siguiente elemento
+        @Override
+        public Actividad next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No hay más elementos en la lista.");
+            }
+
+            Actividad dato = actual.getActividad();
+            actual = actual.getSiguiente();
+            posicion++;
+            return dato;
+        }
+
+    }
+
 }
 

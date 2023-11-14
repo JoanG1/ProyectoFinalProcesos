@@ -9,6 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
+import java.util.Iterator;
+
 public class HelloController {
 
     //Variables Clases
@@ -77,6 +79,10 @@ public class HelloController {
       private TextField TextFieldNombreProceso;
       @FXML
       private Button CreacionProceso;
+      @FXML
+      private TextField TextFieldActividadBuscarProceso;
+      @FXML
+      private AnchorPane PanelBuscarActividadProceso;
 
 
     @FXML
@@ -234,8 +240,13 @@ public class HelloController {
         if(MetodoInsercionNormal.isSelected()){
 
             listaActividades.insertar(nuevaActividad);
+            Iterator<Actividad> iterator = listaActividades.iterator();
+            ListaActividades.getItems().clear();
             listaActividades.imprimirLista();
-            ListaActividades.getItems().add(nuevaActividad);
+            while (iterator.hasNext()){
+                Actividad actividad = iterator.next();
+                ListaActividades.getItems().add(actividad);
+            }
             NombreActividad.clear();
             DescripcionActividad.clear();
             ObligatorioActividad.setSelected(false);
@@ -248,8 +259,13 @@ public class HelloController {
             if(ActividadPrecede.getText() != null){
 
                 listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
+                Iterator<Actividad> iterator = listaActividades.iterator();
+                ListaActividades.getItems().clear();
                 listaActividades.imprimirLista();
-                ListaActividades.getItems().add(nuevaActividad);
+                while (iterator.hasNext()){
+                    Actividad actividad = iterator.next();
+                    ListaActividades.getItems().add(actividad);
+                }
                 NombreActividad.clear();
                 DescripcionActividad.clear();
                 ObligatorioActividad.setSelected(false);
@@ -264,8 +280,13 @@ public class HelloController {
         } else if (MetodoUltimoIngreso.isSelected()) {
 
             listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
+            Iterator<Actividad> iterator = listaActividades.iterator();
+            ListaActividades.getItems().clear();
             listaActividades.imprimirLista();
-            ListaActividades.getItems().add(nuevaActividad);
+            while (iterator.hasNext()){
+                Actividad actividad = iterator.next();
+                ListaActividades.getItems().add(actividad);
+            }
             NombreActividad.clear();
             DescripcionActividad.clear();
             ObligatorioActividad.setSelected(false);
@@ -316,7 +337,55 @@ public class HelloController {
 
         PanelFiltroActividad.setVisible(false);
         listaActividades = listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText());
+        FiltroProceso.clear();
+        ListaActividades.getItems().clear();
+        //Refactorizar volverlo solo un metodo
+        Iterator<Actividad> iterator = listaActividades.iterator();
+        while (iterator.hasNext()){
+            Actividad actividad = iterator.next();
+            ListaActividades.getItems().add(actividad);
+        }
+
         //listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText()).imprimirLista();
 
     }
+
+    @FXML
+    protected void BuscarActividadEnProceso () {
+
+        PanelBuscarActividadProceso.setVisible(true);
+    }
+
+    @FXML
+    protected void BusquedaActividadProceso(){
+
+
+        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
+        PanelBuscarActividadProceso.setVisible(false);
+    }
+
+    @FXML
+    protected void SigInicio () {
+        PanelProcesos.setVisible(false);
+        PanelActividades.setVisible(true);
+    }
+
+    @FXML
+    protected void SigActividades () {
+        PanelActividades.setVisible(false);
+        PanelTareas.setVisible(true);
+    }
+    @FXML
+    protected void AntActividades () {
+        PanelActividades.setVisible(false);
+        PanelProcesos.setVisible(true);
+    }
+    @FXML
+    protected void AntTareas () {
+        PanelTareas.setVisible(false);
+        PanelActividades.setVisible(true);
+
+
+    }
+
 }

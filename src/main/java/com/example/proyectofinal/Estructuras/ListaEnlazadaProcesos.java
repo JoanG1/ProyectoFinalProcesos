@@ -45,6 +45,23 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         System.out.println(); // Para imprimir un salto de línea al final
     }
 
+    public Proceso BuscarProceso (String NombreProceso){
+
+        NodoProceso actual = Cabeza;
+
+        while(actual.getSiguiente() != null){
+
+            if (actual.getProceso().getNombre().equals(NombreProceso)){
+
+                return actual.getProceso();
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        return actual.getProceso();
+    }
+
     public ArrayList<Actividad> buscarActividad(String nombreActividad) {
         ArrayList<Actividad> actividadesEncontradas = new ArrayList<>();
         NodoProceso actual = Cabeza;
@@ -77,7 +94,6 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
     public ListaEnlazadaActividades ListaDeActividadesDeProceso (String Proceso){
 
-        ListaEnlazadaActividades ListaActividades = new ListaEnlazadaActividades();
         NodoProceso Actual = Cabeza;
 
         while (Actual!=null){

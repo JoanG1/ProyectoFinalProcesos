@@ -1,13 +1,12 @@
 package com.example.proyectofinal;
 
+import com.example.proyectofinal.Estructuras.ColaTareas;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 
 import java.util.Iterator;
 
@@ -19,6 +18,8 @@ public class HelloController {
 
     private ListaEnlazadaActividades listaActividades;
 
+    private ColaTareas colaTareas;
+
     private int IdProcesos = 0;
 
     private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
@@ -27,6 +28,10 @@ public class HelloController {
     private TableColumn<Actividad, String> colNombreActividad = new TableColumn<>("Nombre");
     private TableColumn<Actividad, String> colDescripcionActividad = new TableColumn<>("Descripcion");
     private TableColumn<Actividad, Boolean> colObligatorio = new TableColumn<>("Obligatorio");
+
+    private TableColumn<Tarea, String> colDescripcionTarea = new TableColumn<>("Descripcion");
+    private TableColumn<Tarea, Boolean> colObligatorioTarea = new TableColumn<>("Obligatorio");
+    private TableColumn<Tarea, Integer> colDuracionTarea = new TableColumn<>("Duracion");
 
 
 
@@ -46,29 +51,15 @@ public class HelloController {
     @FXML
     private TableView<Proceso> ListaProcesos;
     @FXML
-    private TableColumn<Proceso,String> columnaNombreProceso;
-    @FXML
-    private TableColumn<Proceso,String> columnaIdProcesos;
-
-    @FXML
-    private TableColumn<Proceso,String> columnax;
-
-    @FXML
     private Button CrearActividad;
     @FXML
     private Button BuscarActividad;
     @FXML
     private TableView<Actividad> ListaActividades;
     @FXML
-    private Button CrearTarea;
-    @FXML
     private Button BuscarTarea;
     @FXML
-    private TableView ListadoTareas;
-    @FXML
-    private TableColumn columnaNombreTareas;
-    @FXML
-    private TableColumn columnaIdTareas;
+    private TableView<Tarea> ListadoTareas;
     @FXML
     private AnchorPane PanelPrincipal;
     @FXML
@@ -83,6 +74,11 @@ public class HelloController {
       private TextField TextFieldActividadBuscarProceso;
       @FXML
       private AnchorPane PanelBuscarActividadProceso;
+      @FXML
+      private AnchorPane PanelBuscarProceso;
+        @FXML
+        private TextField TextFieldBuscarProceso;
+
 
 
     @FXML
@@ -111,15 +107,31 @@ public class HelloController {
         private TextField ActividadPrecede ;
         @FXML
         private Label error ;
-
-      @FXML
-      private Button CreacionActividad;
-
-
-
+        @FXML
+        private AnchorPane PanelBuscadorActividad;
+          @FXML
+          private TextField TextFieldBuscadorActividad ;
+          @FXML
+          private Button BuscadorActividad;
+          @FXML
+          private Button CreacionActividad;
 
     @FXML
     private AnchorPane PanelTareas;
+        @FXML
+        private AnchorPane PanelCreacionTareas;
+        @FXML
+        private TextField TextFieldNombreActividadTareas ;
+        @FXML
+        private Button CrearTarea;
+        @FXML
+        private AnchorPane PanelCreacionDeTareas2;
+            @FXML
+            private TextField TextFieldDescripcionTarea ;
+            @FXML
+            private CheckBox ObligatorioTarea ;
+            @FXML
+            private TextField TextFieldDuracionTarea ;
 
 
 
@@ -200,6 +212,15 @@ public class HelloController {
         colObligatorio.setCellValueFactory(new PropertyValueFactory<>("Obligatorio"));
         colObligatorio.setPrefWidth(170);
 
+        ListadoTareas.getColumns().addAll(colDescripcionTarea,colObligatorioTarea,colDuracionTarea);
+
+        colDescripcionTarea.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        colDescripcionTarea.setPrefWidth(260);
+        colObligatorioTarea.setCellValueFactory(new PropertyValueFactory<>("Obligatorio"));
+        colObligatorioTarea.setPrefWidth(170);
+        colDuracionTarea.setCellValueFactory(new PropertyValueFactory<>("Duracion"));
+        colDuracionTarea.setPrefWidth(140);
+
     }
 
     @FXML
@@ -211,7 +232,22 @@ public class HelloController {
 
     protected void BuscarProceso (){
 
+        PanelBuscarProceso.setVisible(true);
+
     }
+
+    @FXML
+
+    protected void BusquedaProceso (){
+
+        ListaProcesos.getItems().clear();
+        ListaProcesos.getItems().add(listaProcesos.BuscarProceso(TextFieldBuscarProceso.getText()));
+        PanelBuscarProceso.setVisible(false);
+
+
+    }
+
+
     @FXML
 
     protected void CrearNuevoProceso (){
@@ -226,8 +262,13 @@ public class HelloController {
         Proceso nuevoProceso = new Proceso(IdProcesos, TextFieldNombreProceso.getText());
         listaProcesos.insertar(nuevoProceso);
         listaProcesos.imprimirLista();
+        Iterator<Proceso> iterator = listaProcesos.iterator();
+        ListaProcesos.getItems().clear();
+        while (iterator.hasNext()){
+            Proceso proceso = iterator.next();
+            ListaProcesos.getItems().add(proceso);
+        }
         PanelCrearProceso.setVisible(false);
-        ListaProcesos.getItems().add(nuevoProceso);
         IdProcesos++;
         TextFieldNombreProceso.clear();
 
@@ -309,6 +350,64 @@ public class HelloController {
 
     protected void BuscarActividad (){
 
+        PanelBuscadorActividad.setVisible(true);
+
+    }
+
+    @FXML
+
+    protected void buscadorActividad (){
+
+        ListaActividades.getItems().clear();
+        ListaActividades.getItems().add(listaActividades.BuscarActividad(TextFieldBuscadorActividad.getText()));
+        PanelBuscadorActividad.setVisible(false);
+
+    }
+
+    @FXML
+
+    protected void crearNuevaTarea (){
+
+        PanelActividades.setVisible(false);
+        PanelTareas.setVisible(true);
+        PanelCreacionTareas.setVisible(true);
+    }
+
+    @FXML
+
+    protected void EntrarTareas (){
+
+    PanelCreacionTareas.setVisible(false);
+    colaTareas = listaActividades.ListaDeTareasDeActividad(TextFieldNombreActividadTareas.getText());
+    TextFieldNombreActividadTareas.clear();
+    ListadoTareas.getItems().clear();
+    Iterator<Tarea> iterator = colaTareas.iterator();
+        while (iterator.hasNext()){
+            Tarea tarea = iterator.next();
+            ListadoTareas.getItems().add(tarea);
+        }
+
+        //listaActividades.ListaDeTareasDeActividad(TextFieldNombreActividadTareas.getText()).imprimirCola();
+    }
+
+    @FXML
+
+    protected void CrearUnaTarea (){
+
+        Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(),ObligatorioTarea.isSelected(),Integer.parseInt(TextFieldDuracionTarea.getText()));
+        colaTareas.encolar(tarea);
+        Iterator<Tarea> iterator = colaTareas.iterator();
+        ListadoTareas.getItems().clear();
+        colaTareas.imprimirCola();
+        while (iterator.hasNext()){
+            Tarea tareas = iterator.next();
+            ListadoTareas.getItems().add(tareas);
+        }
+        PanelCreacionDeTareas2.setVisible(false);
+        TextFieldDuracionTarea.clear();
+        TextFieldDescripcionTarea.clear();
+        ObligatorioTarea.setSelected(false);
+
     }
 
     @FXML
@@ -319,6 +418,8 @@ public class HelloController {
     @FXML
 
     protected void CrearNuevaTarea (){
+
+        PanelCreacionDeTareas2.setVisible(true);
 
     }
 

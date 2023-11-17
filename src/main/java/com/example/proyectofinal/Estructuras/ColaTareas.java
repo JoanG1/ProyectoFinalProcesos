@@ -115,10 +115,11 @@ public class ColaTareas implements Iterable<Tarea> {
             System.out.print(nodoActual.getTarea().getDuracion() + " min : " + nodoActual.getTarea().getDescripcion() +  "\n"); // Suponiendo que Tarea tiene un método toString() adecuado
 
             nodoActual = nodoActual.getSiguiente();
+
+            System.out.println("Duracion Total: "+DuracionTotal);
+            System.out.println(); // Para imprimir un salto de línea al final
         }
 
-        System.out.println("Duracion Total: "+DuracionTotal);
-        System.out.println(); // Para imprimir un salto de línea al final
     }
 
 

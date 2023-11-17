@@ -150,6 +150,42 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return null;
     }
 
+    public Actividad BuscarActividad (String NombreActividad){
+
+        NodoActividad actual = Cabeza;
+
+        while (actual.getSiguiente()!=null){
+
+            if(actual.getActividad().getNombre().equals(NombreActividad)){
+
+                return actual.getActividad();
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        return actual.getActividad();
+    }
+
+    public ColaTareas ListaDeTareasDeActividad (String Actividad){
+
+        ColaTareas ListaTareas = new ColaTareas();
+        NodoActividad Actual = Cabeza;
+
+        while (Actual!=null){
+
+            if(Actual.getActividad().getNombre().equals(Actividad)) {
+
+                return Actual.getActividad().getTareas();
+            }
+
+            Actual = Actual.getSiguiente();
+        }
+
+        return null;
+    }
+
+
     @Override
     public Iterator<Actividad> iterator() {
         return new ListaIterator();

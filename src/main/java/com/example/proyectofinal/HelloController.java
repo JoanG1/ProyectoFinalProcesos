@@ -18,12 +18,11 @@ public class HelloController {
 
     //Variables Clases
 
-    private ListaEnlazadaProcesos listaProcesos;
+    private ListaEnlazadaProcesos listaProcesos = null;
 
-    private ListaEnlazadaActividades listaActividades;
+    private ListaEnlazadaActividades listaActividades = null;
 
-    private ColaTareas colaTareas;
-
+    private ColaTareas colaTareas = null;
     private int IdProcesos = 0;
 
     private Usuarios usuario;
@@ -238,18 +237,6 @@ public class HelloController {
         }
 
     }
-    @FXML
-    protected void BuscarActividadEnProceso () {
-
-        PanelBuscarActividadProceso.setVisible(true);
-    }
-    @FXML
-    protected void BusquedaActividadProceso(){
-
-
-        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
-        PanelBuscarActividadProceso.setVisible(false);
-    }
 
 
     //SISTEMAS DE PROCESOS
@@ -318,6 +305,20 @@ public class HelloController {
     }
 
 
+    @FXML
+    protected void BuscarActividadEnProceso () {
+
+        PanelBuscarActividadProceso.setVisible(true);
+    }
+    @FXML
+    protected void BusquedaActividadProceso(){
+
+
+        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
+        PanelBuscarActividadProceso.setVisible(false);
+    }
+
+
     //SISTEMAS DE ACTIVIDADES
 
 
@@ -359,69 +360,71 @@ public class HelloController {
     @FXML
     protected void CreacionDeActividad (){
 
-        Actividad nuevaActividad = new Actividad(NombreActividad.getText(),DescripcionActividad.getText(),ObligatorioActividad.isSelected());
-        if(MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()){
+        if (listaActividades != null) {
 
-            listaActividades.insertar(nuevaActividad);
-            Iterator<Actividad> iterator = listaActividades.iterator();
-            ListaActividades.getItems().clear();
-            listaActividades.imprimirLista();
-            while (iterator.hasNext()){
-                Actividad actividad = iterator.next();
-                ListaActividades.getItems().add(actividad);
-            }
-            NombreActividad.clear();
-            DescripcionActividad.clear();
-            ObligatorioActividad.setSelected(false);
-            PanelCrearActividad.setVisible(false);
-            ActividadPrecede.clear();
-            MetodoInsercionNormal.setSelected(false);
-        }
-        else if (MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()){
+            Actividad nuevaActividad = new Actividad(NombreActividad.getText(),DescripcionActividad.getText(),ObligatorioActividad.isSelected());
+            if(MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()){
 
-            if(ActividadPrecede.getText() != null){
-
-                Boolean flag = listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
-                if (!flag){
-                    Iterator<Actividad> iterator = listaActividades.iterator();
-                    ListaActividades.getItems().clear();
-                    listaActividades.imprimirLista();
-                    while (iterator.hasNext()){
-                        Actividad actividad = iterator.next();
-                        ListaActividades.getItems().add(actividad);
-                    }
-                    NombreActividad.clear();
-                    DescripcionActividad.clear();
-                    ObligatorioActividad.setSelected(false);
-                    PanelCrearActividad.setVisible(false);
-                    ActividadPrecede.clear();
-                    MetodoDespuesActividad.setSelected(false);
+                listaActividades.insertar(nuevaActividad);
+                Iterator<Actividad> iterator = listaActividades.iterator();
+                ListaActividades.getItems().clear();
+                listaActividades.imprimirLista();
+                while (iterator.hasNext()){
+                    Actividad actividad = iterator.next();
+                    ListaActividades.getItems().add(actividad);
                 }
-
-
-
-            }else{
-                error.setText("Debe de ingresar una actividad previa para insertar");
+                NombreActividad.clear();
+                DescripcionActividad.clear();
+                ObligatorioActividad.setSelected(false);
+                PanelCrearActividad.setVisible(false);
+                ActividadPrecede.clear();
+                MetodoInsercionNormal.setSelected(false);
             }
-        } else if (MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()) {
+            else if (MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()){
 
-            listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
-            Iterator<Actividad> iterator = listaActividades.iterator();
-            ListaActividades.getItems().clear();
-            listaActividades.imprimirLista();
-            while (iterator.hasNext()){
-                Actividad actividad = iterator.next();
-                ListaActividades.getItems().add(actividad);
+                if(ActividadPrecede.getText() != null){
+
+                    Boolean flag = listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
+                    if (!flag){
+                        Iterator<Actividad> iterator = listaActividades.iterator();
+                        ListaActividades.getItems().clear();
+                        listaActividades.imprimirLista();
+                        while (iterator.hasNext()){
+                            Actividad actividad = iterator.next();
+                            ListaActividades.getItems().add(actividad);
+                        }
+                        NombreActividad.clear();
+                        DescripcionActividad.clear();
+                        ObligatorioActividad.setSelected(false);
+                        PanelCrearActividad.setVisible(false);
+                        ActividadPrecede.clear();
+                        MetodoDespuesActividad.setSelected(false);
+                    }
+
+
+
+                }else{
+                    error.setText("Debe de ingresar una actividad previa para insertar");
+                }
+            } else if (MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()) {
+
+                listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
+                Iterator<Actividad> iterator = listaActividades.iterator();
+                ListaActividades.getItems().clear();
+                listaActividades.imprimirLista();
+                while (iterator.hasNext()){
+                    Actividad actividad = iterator.next();
+                    ListaActividades.getItems().add(actividad);
+                }
+                NombreActividad.clear();
+                DescripcionActividad.clear();
+                ObligatorioActividad.setSelected(false);
+                PanelCrearActividad.setVisible(false);
+                ActividadPrecede.clear();
+                MetodoDespuesActividad.setSelected(false);
+
             }
-            NombreActividad.clear();
-            DescripcionActividad.clear();
-            ObligatorioActividad.setSelected(false);
-            PanelCrearActividad.setVisible(false);
-            ActividadPrecede.clear();
-            MetodoDespuesActividad.setSelected(false);
-
         }
-
     }
     @FXML
     protected void BuscarActividad (){
@@ -432,13 +435,14 @@ public class HelloController {
     @FXML
     protected void buscadorActividad (){
 
-        Actividad actividad = listaActividades.BuscarActividad(TextFieldBuscadorActividad.getText());
-        if (actividad != null) {
-            ListaActividades.getItems().clear();
-            ListaActividades.getItems().add(actividad);
-            PanelBuscadorActividad.setVisible(false);
+        if (listaActividades != null ){
+            Actividad actividad = listaActividades.BuscarActividad(TextFieldBuscadorActividad.getText());
+            if (actividad != null) {
+                ListaActividades.getItems().clear();
+                ListaActividades.getItems().add(actividad);
+                PanelBuscadorActividad.setVisible(false);
+            }
         }
-
     }
 
 
@@ -482,42 +486,47 @@ public class HelloController {
     @FXML
     protected void CrearUnaTarea (){
 
-        if(EncolarTareas.isSelected()&&!PorPosicion.isSelected()){
+        if(colaTareas!= null){
 
-            if (!TextFieldDuracionTarea.getText().isEmpty()){
-                Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(),ObligatorioTarea.isSelected(),Integer.parseInt(TextFieldDuracionTarea.getText()));
-                colaTareas.encolar(tarea);
-                Iterator<Tarea> iterator = colaTareas.iterator();
-                ListadoTareas.getItems().clear();
-                colaTareas.imprimirCola();
-                while (iterator.hasNext()){
-                    Tarea tareas = iterator.next();
-                    ListadoTareas.getItems().add(tareas);
+            if(EncolarTareas.isSelected()&&!PorPosicion.isSelected()){
+
+                if (!TextFieldDuracionTarea.getText().isEmpty()){
+                    Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(),ObligatorioTarea.isSelected(),Integer.parseInt(TextFieldDuracionTarea.getText()));
+                    colaTareas.encolar(tarea);
+                    Iterator<Tarea> iterator = colaTareas.iterator();
+                    ListadoTareas.getItems().clear();
+                    colaTareas.imprimirCola();
+                    while (iterator.hasNext()){
+                        Tarea tareas = iterator.next();
+                        ListadoTareas.getItems().add(tareas);
+                    }
+                    PanelCreacionDeTareas2.setVisible(false);
+                    TextFieldDuracionTarea.clear();
+                    TextFieldDescripcionTarea.clear();
+                    ObligatorioTarea.setSelected(false);
                 }
-                PanelCreacionDeTareas2.setVisible(false);
-                TextFieldDuracionTarea.clear();
-                TextFieldDescripcionTarea.clear();
-                ObligatorioTarea.setSelected(false);
+
+            } else if (!EncolarTareas.isSelected()&&PorPosicion.isSelected()) {
+
+                if (!TextFieldDuracionTarea.getText().isEmpty()) {
+                    Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(), ObligatorioTarea.isSelected(), Integer.parseInt(TextFieldDuracionTarea.getText()));
+                    colaTareas.insertarEnPosicion(tarea, Integer.parseInt(TextFieldPosicionEncolar.getText()));
+                    Iterator<Tarea> iterator = colaTareas.iterator();
+                    ListadoTareas.getItems().clear();
+                    colaTareas.imprimirCola();
+                    while (iterator.hasNext()) {
+                        Tarea tareas = iterator.next();
+                        ListadoTareas.getItems().add(tareas);
+                    }
+                    PanelCreacionDeTareas2.setVisible(false);
+                    TextFieldDuracionTarea.clear();
+                    TextFieldDescripcionTarea.clear();
+                    ObligatorioTarea.setSelected(false);
+                }
             }
 
-        } else if (!EncolarTareas.isSelected()&&PorPosicion.isSelected()) {
-
-            if (!TextFieldDuracionTarea.getText().isEmpty()) {
-                Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(), ObligatorioTarea.isSelected(), Integer.parseInt(TextFieldDuracionTarea.getText()));
-                colaTareas.insertarEnPosicion(tarea, Integer.parseInt(TextFieldPosicionEncolar.getText()));
-                Iterator<Tarea> iterator = colaTareas.iterator();
-                ListadoTareas.getItems().clear();
-                colaTareas.imprimirCola();
-                while (iterator.hasNext()) {
-                    Tarea tareas = iterator.next();
-                    ListadoTareas.getItems().add(tareas);
-                }
-                PanelCreacionDeTareas2.setVisible(false);
-                TextFieldDuracionTarea.clear();
-                TextFieldDescripcionTarea.clear();
-                ObligatorioTarea.setSelected(false);
-            }
         }
+
 
 
     }

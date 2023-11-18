@@ -47,45 +47,22 @@ public class HelloController {
     //Variables UI
 
     @FXML
-    private Button ImportarProyecto;
-    @FXML
-    private Button NuevoProyecto;
-    @FXML
-    private Button BuscarProceso;
-    @FXML
-    private Button ActividadesEnProceso;
-    @FXML
     private TableView<Proceso> ListaProcesos;
     @FXML
-    private Button CrearActividad;
-    @FXML
-    private Button BuscarActividad;
-    @FXML
     private TableView<Actividad> ListaActividades;
-    @FXML
-    private Button BuscarTarea;
     @FXML
     private TableView<Tarea> ListadoTareas;
 
     //Inicio de sesion
-    @FXML
-    private AnchorPane PanelInicioSesion;
-    @FXML
-    private Button IniciarSesion;
-    @FXML
-    private Button Registrarse;
+
         @FXML
         private AnchorPane PanelIngresarSesion;
             @FXML
             private TextField TextFieldNombreUsuario;
-            @FXML
-            private Button IngresoInicio;
         @FXML
         private AnchorPane PanelRegistrarSesion;
             @FXML
             private TextField TextFieldNuevoUsuario;
-            @FXML
-            private Button IngresoNuevaSesion;
             @FXML
             private CheckBox Admin;
             @FXML
@@ -123,17 +100,14 @@ public class HelloController {
       private TextField TextFieldDuracionMinima;
       @FXML
       private TextField TextFieldDuracionMaxima;
-      @FXML
-      private Button SalirInformacionProceso;
-
 
 
     @FXML
     private AnchorPane PanelActividades;
       @FXML
-      private AnchorPane PanelFiltroActividad;
+      private Button CrearActividad;
       @FXML
-      private Button EntrarActividad;
+      private AnchorPane PanelFiltroActividad;
       @FXML
       private TextField FiltroProceso;
       @FXML
@@ -158,10 +132,6 @@ public class HelloController {
         private AnchorPane PanelBuscadorActividad;
           @FXML
           private TextField TextFieldBuscadorActividad ;
-          @FXML
-          private Button BuscadorActividad;
-          @FXML
-          private Button CreacionActividad;
 
     @FXML
     private AnchorPane PanelTareas;
@@ -185,6 +155,7 @@ public class HelloController {
             private CheckBox PorPosicion ;
             @FXML
             private CheckBox EncolarTareas ;
+
 
     //CONFIGURACION VISTA DE LAS LISTAS
     @FXML
@@ -555,13 +526,12 @@ public class HelloController {
 
     }
 
-    //BOTONES PARA CERRAR PANELES
+    //BOTONES PARA CAMBIO DE PANELES
     @FXML
     protected void SigInicio () {
         PanelProcesos.setVisible(false);
         PanelActividades.setVisible(true);
     }
-
     @FXML
     protected void SigActividades () {
         PanelActividades.setVisible(false);
@@ -579,5 +549,70 @@ public class HelloController {
 
 
     }
+
+
+    //BOTONES PARA CERRAR PANELES
+    @FXML
+    protected void SalirIngresarSesion () {
+        PanelIngresarSesion.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirRegistrarSesion () {
+        PanelRegistrarSesion.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirCrearProceso () {
+        PanelCrearProceso.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirBuscarActividadProceso () {
+        PanelBuscarActividadProceso.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirBuscarProceso () {
+        PanelBuscarProceso.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirFiltroActividad () {
+        PanelFiltroActividad.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirCrearActividad () {
+        PanelCrearActividad.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirBuscadorActividad () {
+        PanelBuscadorActividad.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirCreacionTareas () {
+        PanelCreacionTareas.setVisible(false);
+
+
+    }
+    @FXML
+    protected void SalirCreacionDeTareas2 () {
+        PanelCreacionDeTareas2.setVisible(false);
+
+
+    }
+
+
 
 }

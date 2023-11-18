@@ -185,6 +185,82 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return null;
     }
 
+    public int DuracionMaxima (){
+        int DuracionMaxima = 0;
+
+        ColaTareas colaTareas;
+        NodoActividad actual = Cabeza;
+
+        while (actual!=null){
+
+            colaTareas = actual.getActividad().getTareas();
+            Iterator<Tarea> iterator = colaTareas.iterator();
+
+            while (iterator.hasNext()){
+
+               Tarea tarea = iterator.next();
+               DuracionMaxima += tarea.getDuracion();
+
+            }
+
+            actual = actual.getSiguiente();
+
+        }
+
+        return DuracionMaxima;
+    }
+
+    public int DuracionMinima (){
+        int DuracionMinima = 0;
+
+        ColaTareas colaTareas;
+        NodoActividad actual = Cabeza;
+
+        while (actual!=null){
+
+            if(actual.getActividad().isObligatorio()){
+
+                colaTareas = actual.getActividad().getTareas();
+                Iterator<Tarea> iterator = colaTareas.iterator();
+
+                while (iterator.hasNext()){
+
+                    Tarea tarea = iterator.next();
+
+                    if(tarea.getObligatorio()){
+
+                        DuracionMinima += tarea.getDuracion();
+
+                    }
+
+                }
+
+
+            }
+
+            actual = actual.getSiguiente();
+
+        }
+
+        return DuracionMinima;
+    }
+
+    public void IntercambioActividades(String Actividad1, String Actividad2){
+
+       Actividad actividad1 = BuscarActividad(Actividad1);
+       Actividad actividad2 = BuscarActividad(Actividad2);
+
+       ColaTareas colaAuxiliar;
+
+       colaAuxiliar = actividad1.getTareas();
+
+       actividad1.setTareas(actividad2.getTareas());
+       actividad2.setTareas(colaAuxiliar);
+
+    }
+
+
+
 
     @Override
     public Iterator<Actividad> iterator() {

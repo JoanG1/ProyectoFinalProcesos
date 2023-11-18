@@ -33,6 +33,8 @@ public class Tarea {
         Obligatorio = obligatorio;
     }
 
+
+
     public int getDuracion() {
         return Duracion;
     }

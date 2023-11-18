@@ -3,6 +3,8 @@ package com.example.proyectofinal;
 import com.example.proyectofinal.Estructuras.ColaTareas;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
+import com.example.proyectofinal.Usuarios.Rol;
+import com.example.proyectofinal.Usuarios.Usuarios;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +23,8 @@ public class HelloController {
     private ColaTareas colaTareas;
 
     private int IdProcesos = 0;
+
+    private Usuarios usuario;
 
     private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
     private TableColumn<Proceso, String> colApellido = new TableColumn<>("Id");
@@ -45,8 +49,6 @@ public class HelloController {
     @FXML
     private Button BuscarProceso;
     @FXML
-    private Button CrearProceso;
-    @FXML
     private Button ActividadesEnProceso;
     @FXML
     private TableView<Proceso> ListaProcesos;
@@ -60,8 +62,39 @@ public class HelloController {
     private Button BuscarTarea;
     @FXML
     private TableView<Tarea> ListadoTareas;
+
+    //Inicio de sesion
+    @FXML
+    private AnchorPane PanelInicioSesion;
+    @FXML
+    private Button IniciarSesion;
+    @FXML
+    private Button Registrarse;
+        @FXML
+        private AnchorPane PanelIngresarSesion;
+            @FXML
+            private TextField TextFieldNombreUsuario;
+            @FXML
+            private Button IngresoInicio;
+        @FXML
+        private AnchorPane PanelRegistrarSesion;
+            @FXML
+            private TextField TextFieldNuevoUsuario;
+            @FXML
+            private Button IngresoNuevaSesion;
+            @FXML
+            private CheckBox Admin;
+            @FXML
+            private CheckBox Regular;
+
+
+
+
+
     @FXML
     private AnchorPane PanelPrincipal;
+
+
     @FXML
     private AnchorPane PanelProcesos;
       @FXML
@@ -69,7 +102,7 @@ public class HelloController {
       @FXML
       private TextField TextFieldNombreProceso;
       @FXML
-      private Button CreacionProceso;
+      private Button CrearProceso;
       @FXML
       private TextField TextFieldActividadBuscarProceso;
       @FXML
@@ -78,6 +111,16 @@ public class HelloController {
       private AnchorPane PanelBuscarProceso;
         @FXML
         private TextField TextFieldBuscarProceso;
+      @FXML
+      private AnchorPane PanelInformacionProceso;
+      @FXML
+      private TextField TextFieldInformacionProceso;
+      @FXML
+      private TextField TextFieldDuracionMinima;
+      @FXML
+      private TextField TextFieldDuracionMaxima;
+      @FXML
+      private Button SalirInformacionProceso;
 
 
 
@@ -123,7 +166,7 @@ public class HelloController {
         @FXML
         private TextField TextFieldNombreActividadTareas ;
         @FXML
-        private Button CrearTarea;
+        private Button CrearNuevaTarea;
         @FXML
         private AnchorPane PanelCreacionDeTareas2;
             @FXML
@@ -190,6 +233,54 @@ public class HelloController {
     }
     */
 
+    //INICIO DE SESION
+
+    @FXML
+
+    protected void IniciarSesion (){
+
+        PanelIngresarSesion.setVisible(true);
+    }
+
+    @FXML
+
+    protected void Registrarse (){
+
+        PanelRegistrarSesion.setVisible(true);
+
+    }
+
+    @FXML
+
+    protected void IngresoInicio (){
+
+        PanelIngresarSesion.setVisible(false);
+        PanelPrincipal.setVisible(true);
+    }
+
+    @FXML
+
+    protected void IngresoNuevoInicio (){
+
+        PanelRegistrarSesion.setVisible(false);
+        if (Admin.isSelected()){
+            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.ADMIN);
+        } else if (Regular.isSelected()) {
+            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.USUARIO);
+            PanelPrincipal.setVisible(true);
+            PanelPrincipal.setVisible(true);
+            CrearProceso.setDisable(true);
+            CrearActividad.setDisable(true);
+            CrearNuevaTarea.setDisable(true);
+        }else{
+
+        }
+
+
+
+
+    }
+
     @FXML
 
     protected void CrearNuevoProyecto (){
@@ -241,10 +332,23 @@ public class HelloController {
     protected void BusquedaProceso (){
 
         ListaProcesos.getItems().clear();
-        ListaProcesos.getItems().add(listaProcesos.BuscarProceso(TextFieldBuscarProceso.getText()));
+        Proceso proceso = listaProcesos.BuscarProceso(TextFieldBuscarProceso.getText());
+        ListaProcesos.getItems().add(proceso);
         PanelBuscarProceso.setVisible(false);
+        PanelInformacionProceso.setVisible(true);
+        TextFieldInformacionProceso.setText(proceso.getNombre());
+        TextFieldDuracionMaxima.setText(""+proceso.getListaEnlazadaActividades().DuracionMaxima());
+        TextFieldDuracionMinima.setText(""+proceso.getListaEnlazadaActividades().DuracionMinima());
+        //proceso.getListaEnlazadaActividades().IntercambioActividades("a","b");
 
 
+    }
+
+    @FXML
+
+    protected void SalirInformacionProceso (){
+
+        PanelInformacionProceso.setVisible(false);
     }
 
 

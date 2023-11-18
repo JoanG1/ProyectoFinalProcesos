@@ -11,7 +11,48 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
    <children>
-      <AnchorPane fx:id="PanelPrincipal" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;">
+      <AnchorPane fx:id="PanelInicioSesion" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;">
+         <children>
+            <Label layoutX="224.0" layoutY="39.0" text="Inicio Sesion" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="IniciarSesion" layoutX="242.0" layoutY="150.0" mnemonicParsing="false" onAction="#IniciarSesion" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Iniciar Sesion" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="Registrarse" layoutX="249.0" layoutY="200.0" mnemonicParsing="false" onAction="#Registrarse" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Registrarse" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <AnchorPane fx:id="PanelIngresarSesion" layoutX="119.0" layoutY="93.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldNombreUsuario" layoutX="157.0" layoutY="41.0" />
+                  <Label layoutX="93.0" layoutY="45.0" text="Id" />
+                  <Button fx:id="IngresoInicio" layoutX="151.0" layoutY="133.0" mnemonicParsing="false" onAction="#IngresoInicio" text="Ingresar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PanelRegistrarSesion" layoutX="119.0" layoutY="100.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldNuevoUsuario" layoutX="157.0" layoutY="41.0" />
+                  <Label layoutX="93.0" layoutY="45.0" text="Id" />
+                  <Button fx:id="IngresoNuevaSesion" layoutX="151.0" layoutY="133.0" mnemonicParsing="false" onAction="#IngresoNuevoInicio" text="Ingresar" />
+                  <CheckBox fx:id="Admin" layoutX="45.0" layoutY="100.0" mnemonicParsing="false" text="Admin" />
+                  <CheckBox fx:id="Regular" layoutX="260.0" layoutY="100.0" mnemonicParsing="false" text="Regular" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PanelPrincipal" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
          <children>
             <Button fx:id="NuevoProyecto" layoutX="212.0" layoutY="142.0" mnemonicParsing="false" onAction="#CrearNuevoProyecto" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nuevo Proyecto" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -83,6 +124,17 @@
                   <TextField fx:id="TextFieldBuscarProceso" layoutX="181.0" layoutY="41.0" />
                   <Label layoutX="49.0" layoutY="45.0" text="Nombre Proceso" />
                   <Button fx:id="BusquedaProceso" layoutX="157.0" layoutY="133.0" mnemonicParsing="false" onAction="#BusquedaProceso" text="Buscar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PanelInformacionProceso" layoutX="145.0" layoutY="130.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldInformacionProceso" layoutX="181.0" layoutY="41.0" />
+                  <Label layoutX="49.0" layoutY="45.0" text="Nombre Proceso" />
+                  <Label layoutX="49.0" layoutY="82.0" text="Duracion Minima" />
+                  <TextField fx:id="TextFieldDuracionMinima" layoutX="181.0" layoutY="78.0" prefHeight="26.0" prefWidth="48.0" />
+                  <Label layoutX="49.0" layoutY="115.0" text="Duracion Maxima" />
+                  <TextField fx:id="TextFieldDuracionMaxima" layoutX="181.0" layoutY="110.0" prefHeight="26.0" prefWidth="48.0" />
+                  <Button fx:id="SalirInformacionProceso" layoutX="331.0" layoutY="8.0" mnemonicParsing="false" onAction="#SalirInformacionProceso" text="x" />
                </children>
             </AnchorPane>
             <Button fx:id="SigInicio" layoutX="544.0" layoutY="332.0" mnemonicParsing="false" onAction="#SigInicio" prefHeight="30.0" prefWidth="0.0" style="-fx-background-color: null; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="&gt;" textFill="WHITE">

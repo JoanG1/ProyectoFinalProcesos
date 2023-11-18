@@ -3,6 +3,7 @@ package com.example.proyectofinal;
 import com.example.proyectofinal.Estructuras.ColaTareas;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
+import com.example.proyectofinal.LecturaUsuarios.LecturaUsuarios;
 import com.example.proyectofinal.Usuarios.Rol;
 import com.example.proyectofinal.Usuarios.Usuarios;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class HelloController {
 
@@ -25,6 +27,8 @@ public class HelloController {
     private int IdProcesos = 0;
 
     private Usuarios usuario;
+
+    private LecturaUsuarios lectorUsuarios = new LecturaUsuarios();
 
     private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
     private TableColumn<Proceso, String> colApellido = new TableColumn<>("Id");
@@ -255,6 +259,7 @@ public class HelloController {
     protected void IngresoInicio (){
 
         PanelIngresarSesion.setVisible(false);
+        usuario = lectorUsuarios.buscarUsuarioPorNombre(TextFieldNombreUsuario.getText());
         PanelPrincipal.setVisible(true);
     }
 
@@ -263,22 +268,20 @@ public class HelloController {
     protected void IngresoNuevoInicio (){
 
         PanelRegistrarSesion.setVisible(false);
-        if (Admin.isSelected()){
+        if (Admin.isSelected()&&!Regular.isSelected()){
             usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.ADMIN);
-        } else if (Regular.isSelected()) {
-            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.USUARIO);
             PanelPrincipal.setVisible(true);
+            System.out.println(usuario.getRol());
+        } else if (Regular.isSelected()&&!Admin.isSelected()) {
+            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.USUARIO);
+
             PanelPrincipal.setVisible(true);
             CrearProceso.setDisable(true);
             CrearActividad.setDisable(true);
             CrearNuevaTarea.setDisable(true);
-        }else{
-
         }
 
-
-
-
+        lectorUsuarios.guardarUsuario(usuario);
     }
 
     @FXML

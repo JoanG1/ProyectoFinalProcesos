@@ -1,6 +1,8 @@
 package com.example.proyectofinal.Usuarios;
 
-public class Usuarios {
+import java.io.Serializable;
+
+public class Usuarios implements Serializable {
 
     private String Id;
     private Rol rol;

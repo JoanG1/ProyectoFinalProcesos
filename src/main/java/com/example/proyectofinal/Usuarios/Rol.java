@@ -1,6 +1,8 @@
 package com.example.proyectofinal.Usuarios;
 
-public enum Rol {
+import java.io.Serializable;
+
+public enum Rol implements Serializable {
 
     ADMIN,
     USUARIO

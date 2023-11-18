@@ -179,113 +179,15 @@ public class HelloController {
             private CheckBox ObligatorioTarea ;
             @FXML
             private TextField TextFieldDuracionTarea ;
+            @FXML
+            private TextField TextFieldPosicionEncolar ;
+            @FXML
+            private CheckBox PorPosicion ;
+            @FXML
+            private CheckBox EncolarTareas ;
 
-
-
-    /*@FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-
-        ListaEnlazadaProcesos listaProcesos = new ListaEnlazadaProcesos();
-
-        Proceso proceso = new Proceso(1, "Mantenimiento pc");
-
-        Proceso proceso1 = new Proceso(2, "Mantenimiento tv");
-
-        Actividad actividad = new Actividad("Analisis", "Actividad encargada en el analisis del computador fisicamente y reviar que daños tiene", true);
-        Actividad actividad2 = new Actividad("Entrega", "Actividad encargada de entrega al cliente", true);
-        Actividad actividad3 = new Actividad("Cobro", "Actividad encargada de cobrar el trabajo", true);
-        Actividad actividad4 = new Actividad("Mantenimiento", "Mantenimiento de pc", true);
-
-        Actividad actividad5 = new Actividad("Desarmar", "Desarmar el dispositivo", true);
-
-        Tarea tarea = new Tarea("Desarmar dispositivo", true, 10);
-        Tarea tarea2 = new Tarea("Desconectar componentes", true, 20);
-        Tarea tarea3 = new Tarea("Conectar Componentes", true, 15);
-        Tarea tarea4 = new Tarea("Limpiar Componentes", true, 30);
-
-        Tarea tarea5 = new Tarea("Desconectar cables", true,20);
-
-
-        proceso.getListaEnlazadaActividades().insertar(actividad);
-        proceso.getListaEnlazadaActividades().insertar(actividad2);
-        proceso.getListaEnlazadaActividades().insertarDespuesDeActividad(actividad3, "Analisis");
-        proceso.getListaEnlazadaActividades().insertarDespuesDeUltimoIngreso(actividad4);
-        proceso.getListaEnlazadaActividades().insertar(actividad5);
-
-        proceso1.getListaEnlazadaActividades().insertar(actividad5);
-
-        actividad.getTareas().encolar(tarea);
-        actividad.getTareas().encolar(tarea2);
-        actividad.getTareas().insertarEnPosicion(tarea3, 2);
-        actividad.getTareas().insertarEnPosicion(tarea4, 2);
-
-        actividad5.getTareas().encolar(tarea5);
-
-        listaProcesos.insertar(proceso);
-        listaProcesos.insertar(proceso1);
-
-        listaProcesos.imprimirLista();
-
-        listaProcesos.buscarActividad("Desarmar");
-
-        //listaProcesos.buscarTareaEnProcesos("Mantenimiento pc","Analisis","Desarmar dispositivo");
-
-        listaProcesos.buscarTareaEnProcesos("", "","Desconectar cables");
-
-        proceso.getListaEnlazadaActividades().buscarTareaEnActividad("Analisis","Limpiar Componentes");
-    }
-    */
-
-    //INICIO DE SESION
-
+    //CONFIGURACION VISTA DE LAS LISTAS
     @FXML
-
-    protected void IniciarSesion (){
-
-        PanelIngresarSesion.setVisible(true);
-    }
-
-    @FXML
-
-    protected void Registrarse (){
-
-        PanelRegistrarSesion.setVisible(true);
-
-    }
-
-    @FXML
-
-    protected void IngresoInicio (){
-
-        PanelIngresarSesion.setVisible(false);
-        usuario = lectorUsuarios.buscarUsuarioPorNombre(TextFieldNombreUsuario.getText());
-        PanelPrincipal.setVisible(true);
-    }
-
-    @FXML
-
-    protected void IngresoNuevoInicio (){
-
-        PanelRegistrarSesion.setVisible(false);
-        if (Admin.isSelected()&&!Regular.isSelected()){
-            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.ADMIN);
-            PanelPrincipal.setVisible(true);
-            System.out.println(usuario.getRol());
-        } else if (Regular.isSelected()&&!Admin.isSelected()) {
-            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.USUARIO);
-
-            PanelPrincipal.setVisible(true);
-            CrearProceso.setDisable(true);
-            CrearActividad.setDisable(true);
-            CrearNuevaTarea.setDisable(true);
-        }
-
-        lectorUsuarios.guardarUsuario(usuario);
-    }
-
-    @FXML
-
     protected void CrearNuevoProyecto (){
 
         listaProcesos = new ListaEnlazadaProcesos();
@@ -316,54 +218,77 @@ public class HelloController {
         colDuracionTarea.setPrefWidth(140);
 
     }
-
     @FXML
-
     protected void ImportarProyecto (){
 
     }
+
+    //INICIO DE SESION
+
     @FXML
+    protected void IniciarSesion (){
 
-    protected void BuscarProceso (){
+        PanelIngresarSesion.setVisible(true);
+    }
+    @FXML
+    protected void Registrarse (){
 
-        PanelBuscarProceso.setVisible(true);
+        PanelRegistrarSesion.setVisible(true);
 
     }
-
     @FXML
+    protected void IngresoInicio (){
 
-    protected void BusquedaProceso (){
-
-        ListaProcesos.getItems().clear();
-        Proceso proceso = listaProcesos.BuscarProceso(TextFieldBuscarProceso.getText());
-        ListaProcesos.getItems().add(proceso);
-        PanelBuscarProceso.setVisible(false);
-        PanelInformacionProceso.setVisible(true);
-        TextFieldInformacionProceso.setText(proceso.getNombre());
-        TextFieldDuracionMaxima.setText(""+proceso.getListaEnlazadaActividades().DuracionMaxima());
-        TextFieldDuracionMinima.setText(""+proceso.getListaEnlazadaActividades().DuracionMinima());
-        //proceso.getListaEnlazadaActividades().IntercambioActividades("a","b");
-
+        if(!TextFieldNombreUsuario.getText().isEmpty()){
+            PanelIngresarSesion.setVisible(false);
+            usuario = lectorUsuarios.buscarUsuarioPorNombre(TextFieldNombreUsuario.getText());
+            PanelPrincipal.setVisible(true);
+        }
 
     }
-
     @FXML
+    protected void IngresoNuevoInicio (){
 
-    protected void SalirInformacionProceso (){
+        PanelRegistrarSesion.setVisible(false);
+        if (Admin.isSelected()&&!Regular.isSelected()){
+            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.ADMIN);
+            PanelPrincipal.setVisible(true);
+            lectorUsuarios.guardarUsuario(usuario);
 
-        PanelInformacionProceso.setVisible(false);
+        } else if (Regular.isSelected()&&!Admin.isSelected()) {
+            usuario = new Usuarios(TextFieldNuevoUsuario.getText(), Rol.USUARIO);
+
+            PanelPrincipal.setVisible(true);
+            CrearProceso.setDisable(true);
+            CrearActividad.setDisable(true);
+            CrearNuevaTarea.setDisable(true);
+
+            lectorUsuarios.guardarUsuario(usuario);
+        }
+
+    }
+    @FXML
+    protected void BuscarActividadEnProceso () {
+
+        PanelBuscarActividadProceso.setVisible(true);
+    }
+    @FXML
+    protected void BusquedaActividadProceso(){
+
+
+        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
+        PanelBuscarActividadProceso.setVisible(false);
     }
 
 
-    @FXML
+    //SISTEMAS DE PROCESOS
 
+    @FXML
     protected void CrearNuevoProceso (){
 
         PanelCrearProceso.setVisible(true);
     }
-
     @FXML
-
     protected void CreacionDeProceso () {
 
         Proceso nuevoProceso = new Proceso(IdProcesos, TextFieldNombreProceso.getText());
@@ -380,12 +305,91 @@ public class HelloController {
         TextFieldNombreProceso.clear();
 
     }
+    @FXML
+    protected void BuscarProceso (){
 
+        PanelBuscarProceso.setVisible(true);
+
+    }
+    @FXML
+    protected void BusquedaProceso (){
+
+        if (!TextFieldBuscarProceso.getText().isEmpty()){
+
+            Proceso proceso = listaProcesos.BuscarProceso(TextFieldBuscarProceso.getText());
+            if(proceso != null){
+
+                ListaProcesos.getItems().clear();
+                ListaProcesos.getItems().add(proceso);
+                PanelBuscarProceso.setVisible(false);
+                PanelInformacionProceso.setVisible(true);
+                TextFieldInformacionProceso.setText(proceso.getNombre());
+                TextFieldDuracionMaxima.setText(""+proceso.getListaEnlazadaActividades().DuracionMaxima());
+                TextFieldDuracionMinima.setText(""+proceso.getListaEnlazadaActividades().DuracionMinima());
+                //proceso.getListaEnlazadaActividades().IntercambioActividades("a","b");
+
+            }
+
+        }
+
+    }
+    @FXML
+    protected void SalirInformacionProceso (){
+
+        PanelInformacionProceso.setVisible(false);
+    }
+    @FXML
+    protected void PasarActividades () {
+
+        PanelProcesos.setVisible(false);
+        PanelActividades.setVisible(true);
+        PanelFiltroActividad.setVisible(true);
+    }
+
+
+    //SISTEMAS DE ACTIVIDADES
+
+
+    @FXML
+    protected void EntrarActividades () {
+
+        if(!FiltroProceso.getText().isEmpty()){
+
+            listaActividades = listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText());
+
+            if (listaActividades != null){
+
+                PanelFiltroActividad.setVisible(false);
+                FiltroProceso.clear();
+                ListaActividades.getItems().clear();
+                //Refactorizar volverlo solo un metodo
+                Iterator<Actividad> iterator = listaActividades.iterator();
+                while (iterator.hasNext()){
+                    Actividad actividad = iterator.next();
+                    ListaActividades.getItems().add(actividad);
+                }
+
+                //listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText()).imprimirLista();
+
+            }
+
+
+        }
+
+
+
+    }
+    @FXML
+    protected void CrearNuevaActividad (){
+
+        PanelCrearActividad.setVisible(true);
+
+    }
     @FXML
     protected void CreacionDeActividad (){
 
         Actividad nuevaActividad = new Actividad(NombreActividad.getText(),DescripcionActividad.getText(),ObligatorioActividad.isSelected());
-        if(MetodoInsercionNormal.isSelected()){
+        if(MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()){
 
             listaActividades.insertar(nuevaActividad);
             Iterator<Actividad> iterator = listaActividades.iterator();
@@ -402,30 +406,33 @@ public class HelloController {
             ActividadPrecede.clear();
             MetodoInsercionNormal.setSelected(false);
         }
-        else if (MetodoDespuesActividad.isSelected()){
+        else if (MetodoDespuesActividad.isSelected()&&!MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()){
 
             if(ActividadPrecede.getText() != null){
 
-                listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
-                Iterator<Actividad> iterator = listaActividades.iterator();
-                ListaActividades.getItems().clear();
-                listaActividades.imprimirLista();
-                while (iterator.hasNext()){
-                    Actividad actividad = iterator.next();
-                    ListaActividades.getItems().add(actividad);
+                Boolean flag = listaActividades.insertarDespuesDeActividad(nuevaActividad,ActividadPrecede.getText());
+                if (!flag){
+                    Iterator<Actividad> iterator = listaActividades.iterator();
+                    ListaActividades.getItems().clear();
+                    listaActividades.imprimirLista();
+                    while (iterator.hasNext()){
+                        Actividad actividad = iterator.next();
+                        ListaActividades.getItems().add(actividad);
+                    }
+                    NombreActividad.clear();
+                    DescripcionActividad.clear();
+                    ObligatorioActividad.setSelected(false);
+                    PanelCrearActividad.setVisible(false);
+                    ActividadPrecede.clear();
+                    MetodoDespuesActividad.setSelected(false);
                 }
-                NombreActividad.clear();
-                DescripcionActividad.clear();
-                ObligatorioActividad.setSelected(false);
-                PanelCrearActividad.setVisible(false);
-                ActividadPrecede.clear();
-                MetodoDespuesActividad.setSelected(false);
+
 
 
             }else{
                 error.setText("Debe de ingresar una actividad previa para insertar");
             }
-        } else if (MetodoUltimoIngreso.isSelected()) {
+        } else if (MetodoUltimoIngreso.isSelected()&&!MetodoInsercionNormal.isSelected()&&!MetodoDespuesActividad.isSelected()) {
 
             listaActividades.insertarDespuesDeUltimoIngreso(nuevaActividad);
             Iterator<Actividad> iterator = listaActividades.iterator();
@@ -446,132 +453,109 @@ public class HelloController {
 
     }
     @FXML
-
-    protected void CrearNuevaActividad (){
-
-        PanelCrearActividad.setVisible(true);
-
-    }
-
-    @FXML
-
     protected void BuscarActividad (){
 
         PanelBuscadorActividad.setVisible(true);
 
     }
-
     @FXML
-
     protected void buscadorActividad (){
 
-        ListaActividades.getItems().clear();
-        ListaActividades.getItems().add(listaActividades.BuscarActividad(TextFieldBuscadorActividad.getText()));
-        PanelBuscadorActividad.setVisible(false);
+        Actividad actividad = listaActividades.BuscarActividad(TextFieldBuscadorActividad.getText());
+        if (actividad != null) {
+            ListaActividades.getItems().clear();
+            ListaActividades.getItems().add(actividad);
+            PanelBuscadorActividad.setVisible(false);
+        }
 
     }
 
-    @FXML
 
+    //SISTEMAS DE TAREAS
+
+    @FXML
+    protected void EntrarTareas () {
+
+        if (!TextFieldNombreActividadTareas.getText().isEmpty()) {
+
+            colaTareas = listaActividades.ListaDeTareasDeActividad(TextFieldNombreActividadTareas.getText());
+
+            if (colaTareas != null){
+                PanelCreacionTareas.setVisible(false);
+                TextFieldNombreActividadTareas.clear();
+                ListadoTareas.getItems().clear();
+                Iterator<Tarea> iterator = colaTareas.iterator();
+                while (iterator.hasNext()) {
+                    Tarea tarea = iterator.next();
+                    ListadoTareas.getItems().add(tarea);
+                }
+
+            }
+
+        }
+
+    }
+    @FXML
     protected void crearNuevaTarea (){
 
         PanelActividades.setVisible(false);
         PanelTareas.setVisible(true);
         PanelCreacionTareas.setVisible(true);
     }
-
     @FXML
-
-    protected void EntrarTareas (){
-
-    PanelCreacionTareas.setVisible(false);
-    colaTareas = listaActividades.ListaDeTareasDeActividad(TextFieldNombreActividadTareas.getText());
-    TextFieldNombreActividadTareas.clear();
-    ListadoTareas.getItems().clear();
-    Iterator<Tarea> iterator = colaTareas.iterator();
-        while (iterator.hasNext()){
-            Tarea tarea = iterator.next();
-            ListadoTareas.getItems().add(tarea);
-        }
-
-        //listaActividades.ListaDeTareasDeActividad(TextFieldNombreActividadTareas.getText()).imprimirCola();
-    }
-
-    @FXML
-
-    protected void CrearUnaTarea (){
-
-        Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(),ObligatorioTarea.isSelected(),Integer.parseInt(TextFieldDuracionTarea.getText()));
-        colaTareas.encolar(tarea);
-        Iterator<Tarea> iterator = colaTareas.iterator();
-        ListadoTareas.getItems().clear();
-        colaTareas.imprimirCola();
-        while (iterator.hasNext()){
-            Tarea tareas = iterator.next();
-            ListadoTareas.getItems().add(tareas);
-        }
-        PanelCreacionDeTareas2.setVisible(false);
-        TextFieldDuracionTarea.clear();
-        TextFieldDescripcionTarea.clear();
-        ObligatorioTarea.setSelected(false);
-
-    }
-
-    @FXML
-
-    protected void BuscarTarea (){
-
-    }
-    @FXML
-
     protected void CrearNuevaTarea (){
 
         PanelCreacionDeTareas2.setVisible(true);
 
     }
-
     @FXML
+    protected void CrearUnaTarea (){
 
-    protected void PasarActividades () {
+        if(EncolarTareas.isSelected()&&!PorPosicion.isSelected()){
 
-        PanelProcesos.setVisible(false);
-        PanelActividades.setVisible(true);
-        PanelFiltroActividad.setVisible(true);
-    }
+            if (!TextFieldDuracionTarea.getText().isEmpty()){
+                Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(),ObligatorioTarea.isSelected(),Integer.parseInt(TextFieldDuracionTarea.getText()));
+                colaTareas.encolar(tarea);
+                Iterator<Tarea> iterator = colaTareas.iterator();
+                ListadoTareas.getItems().clear();
+                colaTareas.imprimirCola();
+                while (iterator.hasNext()){
+                    Tarea tareas = iterator.next();
+                    ListadoTareas.getItems().add(tareas);
+                }
+                PanelCreacionDeTareas2.setVisible(false);
+                TextFieldDuracionTarea.clear();
+                TextFieldDescripcionTarea.clear();
+                ObligatorioTarea.setSelected(false);
+            }
 
-    @FXML
+        } else if (!EncolarTareas.isSelected()&&PorPosicion.isSelected()) {
 
-    protected void EntrarActividades () {
-
-        PanelFiltroActividad.setVisible(false);
-        listaActividades = listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText());
-        FiltroProceso.clear();
-        ListaActividades.getItems().clear();
-        //Refactorizar volverlo solo un metodo
-        Iterator<Actividad> iterator = listaActividades.iterator();
-        while (iterator.hasNext()){
-            Actividad actividad = iterator.next();
-            ListaActividades.getItems().add(actividad);
+            if (!TextFieldDuracionTarea.getText().isEmpty()) {
+                Tarea tarea = new Tarea(TextFieldDescripcionTarea.getText(), ObligatorioTarea.isSelected(), Integer.parseInt(TextFieldDuracionTarea.getText()));
+                colaTareas.insertarEnPosicion(tarea, Integer.parseInt(TextFieldPosicionEncolar.getText()));
+                Iterator<Tarea> iterator = colaTareas.iterator();
+                ListadoTareas.getItems().clear();
+                colaTareas.imprimirCola();
+                while (iterator.hasNext()) {
+                    Tarea tareas = iterator.next();
+                    ListadoTareas.getItems().add(tareas);
+                }
+                PanelCreacionDeTareas2.setVisible(false);
+                TextFieldDuracionTarea.clear();
+                TextFieldDescripcionTarea.clear();
+                ObligatorioTarea.setSelected(false);
+            }
         }
 
-        //listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText()).imprimirLista();
 
     }
-
     @FXML
-    protected void BuscarActividadEnProceso () {
+    protected void BuscarTarea (){
 
-        PanelBuscarActividadProceso.setVisible(true);
     }
 
-    @FXML
-    protected void BusquedaActividadProceso(){
-
-
-        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
-        PanelBuscarActividadProceso.setVisible(false);
-    }
-
+    //BOTONES PARA CERRAR PANELES
     @FXML
     protected void SigInicio () {
         PanelProcesos.setVisible(false);

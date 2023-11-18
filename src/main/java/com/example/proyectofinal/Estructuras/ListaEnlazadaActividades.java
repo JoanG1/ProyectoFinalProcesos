@@ -37,12 +37,12 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
     }
 
 
-    public void insertarDespuesDeActividad(Actividad nuevaActividad, String nombreNodoPrevio) {
+    public Boolean insertarDespuesDeActividad(Actividad nuevaActividad, String nombreNodoPrevio) {
         NodoActividad nuevoNodo = new NodoActividad(nuevaActividad);
         if (Cabeza == null) {
             Cabeza = nuevoNodo;
             UltimoIngreso = nuevaActividad.getNombre();
-            return;
+            return false;
         }
 
         NodoActividad actual = Cabeza;
@@ -51,12 +51,12 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
                 nuevoNodo.setSiguiente(actual.getSiguiente());
                 actual.setSiguiente(nuevoNodo);
                 UltimoIngreso = nuevaActividad.getNombre();
-                return;
+                return false;
             }
             actual = actual.getSiguiente();
         }
 
-        insertar(nuevaActividad);
+        return true;
     }
 
     public void imprimirLista() {
@@ -154,22 +154,26 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
 
         NodoActividad actual = Cabeza;
 
-        while (actual.getSiguiente()!=null){
+        if (!actual.getActividad().getNombre().equals(NombreActividad)) {
+            while (actual.getSiguiente()!=null){
 
-            if(actual.getActividad().getNombre().equals(NombreActividad)){
+                if(actual.getActividad().getNombre().equals(NombreActividad)){
 
-                return actual.getActividad();
+                    return actual.getActividad();
+                }
+
+                actual = actual.getSiguiente();
             }
 
-            actual = actual.getSiguiente();
+        }else{
+            return actual.getActividad();
         }
 
-        return actual.getActividad();
+        return null;
     }
 
-    public ColaTareas ListaDeTareasDeActividad (String Actividad){
+    public ColaTareas ListaDeTareasDeActividad (String Actividad) {
 
-        ColaTareas ListaTareas = new ColaTareas();
         NodoActividad Actual = Cabeza;
 
         while (Actual!=null){

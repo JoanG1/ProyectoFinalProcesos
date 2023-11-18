@@ -255,7 +255,7 @@
                   <Label layoutX="355.0" layoutY="5.0" text="Metodo" />
                   <Label layoutX="295.0" layoutY="29.0" text="Encolar" />
                   <Label layoutX="295.0" layoutY="72.0" text="Por posicion" />
-                  <TextField fx:id="TextFieldDuracionEncolar" layoutX="365.0" layoutY="67.0" prefHeight="26.0" prefWidth="32.0" />
+                  <TextField fx:id="TextFieldPosicionEncolar" layoutX="365.0" layoutY="67.0" prefHeight="26.0" prefWidth="32.0" />
                   <CheckBox fx:id="PorPosicion" layoutX="417.0" layoutY="72.0" mnemonicParsing="false" />
                   <CheckBox fx:id="EncolarTareas" layoutX="372.0" layoutY="29.0" mnemonicParsing="false" />
                </children>

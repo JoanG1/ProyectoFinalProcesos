@@ -49,17 +49,26 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
         NodoProceso actual = Cabeza;
 
-        while(actual.getSiguiente() != null){
+        if(actual != null){
+
+            while(actual.getSiguiente() != null){
+
+                if (actual.getProceso().getNombre().equals(NombreProceso)){
+
+                    return actual.getProceso();
+                }
+
+                actual = actual.getSiguiente();
+            }
 
             if (actual.getProceso().getNombre().equals(NombreProceso)){
 
                 return actual.getProceso();
             }
 
-            actual = actual.getSiguiente();
         }
 
-        return actual.getProceso();
+        return null;
     }
 
     public ArrayList<Actividad> buscarActividad(String nombreActividad) {

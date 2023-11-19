@@ -118,31 +118,34 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return null;
     }
 
-    public Tarea buscarTareaEnProcesos(String nombreProceso, String nombreActividad, String nombreTarea) {
-        NodoProceso actual = Cabeza;
+    public Tarea buscarTareaEnProceso(String Tarea){
 
-        while (actual != null) {
-            if (actual.getProceso().getNombre().equals(nombreProceso)||nombreProceso.isEmpty()) {
+        Iterator<Proceso> iterator = iterator();
 
-                ColaTareas colaTareas = actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getTareas();
+        while (iterator.hasNext()){
 
-                if (actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre().equals(nombreActividad)||nombreActividad.isEmpty()) {
-                    NodoTarea tareaActual = colaTareas.nodoPrimero;
-                    while (tareaActual != null) {
-                        if (tareaActual.getTarea().getDescripcion().equals(nombreTarea)) {
+            Proceso proceso = iterator.next();
+            ListaEnlazadaActividades listaActividades = proceso.getListaEnlazadaActividades();
+            Iterator<Actividad> iteratorActividad = proceso.getListaEnlazadaActividades().iterator();
+            while (iteratorActividad.hasNext()){
 
+                Actividad actividad = iteratorActividad.next();
+                ColaTareas colaTareas = actividad.getTareas();
+                Iterator<Tarea> iteratorTareas = colaTareas.iterator();
 
-                            System.out.println("Proceso Padre: "+actual.getProceso().getNombre()+"\n"+"Actividad Padre:"+actual.getProceso().getListaEnlazadaActividades().getCabeza().getActividad().getNombre()+"\n"+"Tarea: "+tareaActual.getTarea().Descripcion);
-                            return tareaActual.getTarea();
-                        }
-                        tareaActual = tareaActual.getSiguiente();
+                while (iteratorTareas.hasNext()){
+
+                    Tarea tarea = iteratorTareas.next();
+                    if(tarea.getDescripcion().equals(Tarea)){
+                        System.out.println("Proceso Padre: "+proceso.getNombre()+"\n"+"Actividad Padre:"+proceso.getListaEnlazadaActividades().getCabeza().getActividad().getNombre()+"\n"+"Tarea: "+tarea.getDescripcion());
+                        return tarea;
                     }
                 }
+
             }
-            actual = actual.siguiente;
         }
 
-        return null; // Retorna null si no se encuentra la tarea
+        return null;
     }
 
     //METODODS GETTERS Y SETTERS

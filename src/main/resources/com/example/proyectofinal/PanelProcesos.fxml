@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinal.HelloController">
    <children>
       <AnchorPane fx:id="PanelInicioSesion" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;">
          <children>
@@ -107,6 +107,11 @@
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
+            <Button fx:id="BuscarTareaEnProcesos" layoutX="84.0" layoutY="284.0" mnemonicParsing="false" onAction="#BuscarTareaEnProcesos" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
             <AnchorPane fx:id="PanelCrearProceso" layoutX="115.0" layoutY="100.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
                <children>
                   <TextField fx:id="TextFieldNombreProceso" layoutX="181.0" layoutY="41.0" />
@@ -142,14 +147,17 @@
                   <Button fx:id="SalirInformacionProceso" layoutX="331.0" layoutY="8.0" mnemonicParsing="false" onAction="#SalirInformacionProceso" text="x" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="PanelBuscarTareaProceso" layoutX="135.0" layoutY="120.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldTareaBuscarProceso" layoutX="181.0" layoutY="41.0" />
+                  <Label layoutX="49.0" layoutY="45.0" text="Nombre Tarea" />
+                  <Button fx:id="BusquedaTareaProceso" layoutX="157.0" layoutY="133.0" mnemonicParsing="false" onAction="#BusquedaTareaProceso" text="Buscar" />
+                  <Button fx:id="SalirBuscarTareaProceso" layoutX="331.0" layoutY="7.0" mnemonicParsing="false" onAction="#SalirBuscarTareaProceso" text="x" />
+               </children>
+            </AnchorPane>
             <Button fx:id="SigInicio" layoutX="544.0" layoutY="332.0" mnemonicParsing="false" onAction="#SigInicio" prefHeight="30.0" prefWidth="0.0" style="-fx-background-color: null; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="&gt;" textFill="WHITE">
                <font>
                   <Font name="Playbill" size="17.0" />
-               </font>
-            </Button>
-            <Button fx:id="BuscarTareaEnProcesos" layoutX="84.0" layoutY="284.0" mnemonicParsing="false" onAction="#BuscarTareaEnProcesos" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
          </children>
@@ -172,6 +180,11 @@
                </font>
             </Button>
             <Button fx:id="IngresarTareas" layoutX="377.0" layoutY="348.0" mnemonicParsing="false" onAction="#crearNuevaTarea" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Tareas" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="BuscarTareaEnActividad" layoutX="237.0" layoutY="348.0" mnemonicParsing="false" onAction="#BuscarTareaEnActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
@@ -214,6 +227,16 @@
                   <Button fx:id="SalirBuscadorActividad" layoutX="226.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirBuscadorActividad" text="x" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="PanelBuscadorTareaActividad" layoutX="167.0" layoutY="116.0" prefHeight="172.0" prefWidth="253.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldBuscarTareaActividad" layoutX="115.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" />
+                  <Label layoutX="14.0" layoutY="30.0" text="Nombre Tarea" />
+                  <Button fx:id="BuscadorTareaActividad" layoutX="85.0" layoutY="127.0" mnemonicParsing="false" onAction="#BuscadorTareaActividad" text="Buscar Tarea" />
+                  <Button fx:id="SalirBuscadorTareaActividad" layoutX="226.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirBuscadorTareaActividad" text="x" />
+                  <Label layoutX="14.0" layoutY="69.0" text="Nombre Actividad" />
+                  <TextField fx:id="TextFieldBuscarTareaActividad2" layoutX="116.0" layoutY="65.0" prefHeight="26.0" prefWidth="105.0" />
+               </children>
+            </AnchorPane>
             <Button fx:id="SigActividades" layoutX="545.0" layoutY="348.0" mnemonicParsing="false" onAction="#SigActividades" prefHeight="30.0" prefWidth="0.0" style="-fx-background-color: null; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="&gt;" textFill="WHITE">
                <font>
                   <Font name="Playbill" size="17.0" />
@@ -224,11 +247,16 @@
                   <Font name="Playbill" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarTareaEnActividad" layoutX="237.0" layoutY="348.0" mnemonicParsing="false" onAction="#BuscarTareaEnActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="14.0" layoutY="21.0" prefHeight="13.0" prefWidth="44.0" text="Proceso :" textFill="WHITE">
                <font>
-                  <Font name="Rockwell" size="15.0" />
+                  <Font name="Rockwell" size="10.0" />
                </font>
-            </Button>
+            </Label>
+            <Label fx:id="InfoPanelActividades" layoutX="62.0" layoutY="21.0" prefHeight="13.0" prefWidth="139.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PanelTareas" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
@@ -278,6 +306,14 @@
                   <CheckBox fx:id="PorPosicion" layoutX="417.0" layoutY="72.0" mnemonicParsing="false" />
                   <CheckBox fx:id="EncolarTareas" layoutX="372.0" layoutY="29.0" mnemonicParsing="false" />
                   <Button fx:id="SalirCreacionDeTareas2" layoutX="442.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirCreacionDeTareas2" text="x" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PanelBuscarTareaLista" layoutX="175.0" layoutY="167.0" prefHeight="139.0" prefWidth="285.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldDescripcionTarea2" layoutX="143.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" />
+                  <Label layoutX="14.0" layoutY="30.0" text="Descripcion Tarea" />
+                  <Button fx:id="BuscarTareaLista" layoutX="101.0" layoutY="85.0" mnemonicParsing="false" onAction="#BuscarTareaLista" text="Buscar Tarea" />
+                  <Button fx:id="SalirCreacionTareas1" layoutX="254.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirBuscadorTarea1" text="x" />
                </children>
             </AnchorPane>
          </children>

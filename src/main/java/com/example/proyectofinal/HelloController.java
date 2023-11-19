@@ -99,6 +99,16 @@ public class HelloController {
       private TextField TextFieldDuracionMinima;
       @FXML
       private TextField TextFieldDuracionMaxima;
+      @FXML
+      private AnchorPane PanelBuscarTareaProceso;
+        @FXML
+        private TextField TextFieldTareaBuscarProceso;
+        @FXML
+        private Button BusquedaTareaProceso;
+        @FXML
+        private Button SalirBuscarTareaProceso;
+
+
 
 
     @FXML
@@ -128,9 +138,22 @@ public class HelloController {
         @FXML
         private Label error ;
         @FXML
+        private Label InfoPanelActividades;
+        @FXML
         private AnchorPane PanelBuscadorActividad;
           @FXML
           private TextField TextFieldBuscadorActividad ;
+        @FXML
+        private AnchorPane PanelBuscadorTareaActividad;
+            @FXML
+            private TextField TextFieldBuscarTareaActividad;
+            @FXML
+            private TextField TextFieldBuscarTareaActividad2;
+            @FXML
+            private Button BuscadorTareaActividad;
+            @FXML
+            private Button SalirBuscadorActividad1;
+
 
     @FXML
     private AnchorPane PanelTareas;
@@ -154,6 +177,15 @@ public class HelloController {
             private CheckBox PorPosicion ;
             @FXML
             private CheckBox EncolarTareas ;
+            @FXML
+            private AnchorPane PanelBuscarTareaLista;
+            @FXML
+            private TextField TextFieldDescripcionTarea2;
+            @FXML
+            private Button BuscarTareaLista;
+            @FXML
+            private Button SalirCreacionTareas1;
+
 
 
     //CONFIGURACION VISTA DE LAS LISTAS
@@ -210,9 +242,14 @@ public class HelloController {
     protected void IngresoInicio (){
 
         if(!TextFieldNombreUsuario.getText().isEmpty()){
-            PanelIngresarSesion.setVisible(false);
+
             usuario = lectorUsuarios.buscarUsuarioPorNombre(TextFieldNombreUsuario.getText());
-            PanelPrincipal.setVisible(true);
+
+            if(usuario !=null){
+                PanelIngresarSesion.setVisible(false);
+                PanelPrincipal.setVisible(true);
+            }
+
         }
 
     }
@@ -317,6 +354,22 @@ public class HelloController {
         listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
         PanelBuscarActividadProceso.setVisible(false);
     }
+    @FXML
+    protected void BuscarTareaEnProcesos (){
+
+        PanelBuscarTareaProceso.setVisible(true);
+
+    }
+    @FXML
+    protected void BusquedaTareaProceso (){
+
+        if (!TextFieldTareaBuscarProceso.getText().isEmpty()){
+
+            listaProcesos.buscarTareaEnProceso(TextFieldTareaBuscarProceso.getText());
+            PanelBuscarTareaProceso.setVisible(false);
+        }
+
+    }
 
 
     //SISTEMAS DE ACTIVIDADES
@@ -331,6 +384,7 @@ public class HelloController {
 
             if (listaActividades != null){
 
+                InfoPanelActividades.setText(FiltroProceso.getText());
                 PanelFiltroActividad.setVisible(false);
                 FiltroProceso.clear();
                 ListaActividades.getItems().clear();
@@ -427,10 +481,18 @@ public class HelloController {
         }
     }
     @FXML
-    protected void BuscarActividad (){
+    protected void BuscarTareaEnActividad (){
 
-        PanelBuscadorActividad.setVisible(true);
+        PanelBuscadorTareaActividad.setVisible(true);
 
+    }
+    @FXML
+    protected void BuscadorTareaActividad (){
+
+        if(!TextFieldBuscarTareaActividad.getText().isEmpty()){
+            PanelBuscadorTareaActividad.setVisible(false);
+            listaActividades.buscarTareaEnActividad(TextFieldBuscarTareaActividad2.getText(),TextFieldBuscarTareaActividad.getText());
+        }
     }
     @FXML
     protected void buscadorActividad (){
@@ -444,6 +506,14 @@ public class HelloController {
             }
         }
     }
+    @FXML
+    protected void BuscarActividad (){
+
+        PanelBuscadorActividad.setVisible(true);
+
+    }
+
+
 
 
     //SISTEMAS DE TAREAS
@@ -533,6 +603,24 @@ public class HelloController {
     @FXML
     protected void BuscarTarea (){
 
+        PanelBuscarTareaLista.setVisible(true);
+    }
+    @FXML
+    protected void BuscarTareaLista (){
+
+        if(!TextFieldDescripcionTarea2.getText().isEmpty()){
+
+            if(colaTareas!=null){
+                Tarea tarea =  colaTareas.buscadorTarea(TextFieldDescripcionTarea2.getText());
+
+                if(tarea!= null){
+                    ListadoTareas.getItems().clear();
+                    ListadoTareas.getItems().add(tarea);
+                    PanelBuscarTareaLista.setVisible(false);
+                }
+            }
+        }
+
     }
 
     //BOTONES PARA CAMBIO DE PANELES
@@ -564,63 +652,59 @@ public class HelloController {
     @FXML
     protected void SalirIngresarSesion () {
         PanelIngresarSesion.setVisible(false);
-
-
     }
     @FXML
     protected void SalirRegistrarSesion () {
         PanelRegistrarSesion.setVisible(false);
-
-
     }
     @FXML
     protected void SalirCrearProceso () {
         PanelCrearProceso.setVisible(false);
-
-
     }
     @FXML
     protected void SalirBuscarActividadProceso () {
         PanelBuscarActividadProceso.setVisible(false);
-
-
     }
     @FXML
     protected void SalirBuscarProceso () {
         PanelBuscarProceso.setVisible(false);
-
-
     }
     @FXML
     protected void SalirFiltroActividad () {
         PanelFiltroActividad.setVisible(false);
-
-
     }
     @FXML
     protected void SalirCrearActividad () {
         PanelCrearActividad.setVisible(false);
-
-
     }
     @FXML
     protected void SalirBuscadorActividad () {
         PanelBuscadorActividad.setVisible(false);
-
-
     }
     @FXML
     protected void SalirCreacionTareas () {
         PanelCreacionTareas.setVisible(false);
-
-
     }
     @FXML
     protected void SalirCreacionDeTareas2 () {
         PanelCreacionDeTareas2.setVisible(false);
-
-
     }
+    @FXML
+    protected void SalirBuscarTareaProceso () {
+        PanelBuscarTareaProceso.setVisible(false);
+    }
+    @FXML
+    protected void SalirBuscadorTareaActividad () {
+        PanelBuscadorTareaActividad.setVisible(false);
+    }
+    @FXML
+    protected void SalirBuscadorTarea1 () {
+        PanelBuscarTareaLista.setVisible(false);
+    }
+
+
+
+
 
 
 

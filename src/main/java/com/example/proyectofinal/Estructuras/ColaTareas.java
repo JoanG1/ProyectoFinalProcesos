@@ -122,6 +122,25 @@ public class ColaTareas implements Iterable<Tarea> {
 
     }
 
+    public Tarea buscadorTarea (String Tarea){
+
+        Iterator<Tarea> iterator = iterator();
+
+        while (iterator.hasNext()){
+
+            Tarea tarea = iterator.next();
+
+            if(tarea.getDescripcion().equals(Tarea)){
+                System.out.println("Tarea: "+tarea.getDescripcion());
+                return tarea;
+
+            }
+
+        }
+
+        return null;
+    }
+
 
     @Override
     public Iterator<Tarea> iterator() {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LecturaUsuarios {
 
-    private static final String NOMBRE_ARCHIVO ="C:\\Users\\joang\\Joan\\Traslado\\developer\\IJ\\Olimpiadas\\ProyectoFinal\\src\\main\\java\\com\\example\\proyectofinal\\LecturaUsuarios\\usuarios.txt";
+    private static final String NOMBRE_ARCHIVO ="src/main/java/com/example/proyectofinal/LecturaUsuarios/usuarios.txt";
     public LecturaUsuarios (){
 
     }

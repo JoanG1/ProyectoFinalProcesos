@@ -146,27 +146,36 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
 
             actual = actual.getSiguiente();
         }
+        if (actual.getActividad().getNombre().equals(NombreActividad)) {
+            ColaTareas tareas = actual.getActividad().getTareas();
+            NodoTarea tareaActual = tareas.nodoPrimero;
+
+            while (tareaActual != null) {
+                if (tareaActual.getTarea().getDescripcion().equals(NombreTarea)) {
+
+                    System.out.println("");
+                    System.out.println("Actividad: " + Cabeza.getActividad().getNombre() + "\n" + "Tarea: " + tareaActual.getTarea().Descripcion + "\n" + "Duracion: " + tareaActual.getTarea().getDuracion() + "min");
+                    return tareaActual.getTarea();
+                }
+
+                tareaActual = tareaActual.getSiguiente();
+            }
+        }
 
         return null;
     }
 
-    public Actividad BuscarActividad (String NombreActividad){
+    public Actividad BuscarActividad (String Actividad){
 
-        NodoActividad actual = Cabeza;
+        Iterator<Actividad> iterator = iterator();
 
-        if (!actual.getActividad().getNombre().equals(NombreActividad)) {
-            while (actual.getSiguiente()!=null){
+        while (iterator.hasNext()){
 
-                if(actual.getActividad().getNombre().equals(NombreActividad)){
+            Actividad actividad = iterator.next();
+            if(actividad.getNombre().equals(Actividad)){
 
-                    return actual.getActividad();
-                }
-
-                actual = actual.getSiguiente();
+                return actividad;
             }
-
-        }else{
-            return actual.getActividad();
         }
 
         return null;
@@ -274,7 +283,6 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
     // Clase interna que implementa la interfaz Iterator
     private class ListaIterator implements Iterator<Actividad> {
         private NodoActividad actual;
-
         private int posicion;
 
         // Constructor del Iterator

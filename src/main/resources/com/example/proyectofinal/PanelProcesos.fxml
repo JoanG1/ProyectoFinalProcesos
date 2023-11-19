@@ -86,18 +86,18 @@
                   <Font name="Rockwell" size="26.0" />
                </font>
             </Label>
-            <Button fx:id="BuscarProceso" layoutX="76.0" layoutY="170.0" mnemonicParsing="false" onAction="#BuscarProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Proceso" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarProceso" layoutX="81.0" layoutY="158.0" mnemonicParsing="false" onAction="#BuscarProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Proceso" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
             <TableView fx:id="ListaProcesos" layoutX="314.0" layoutY="100.0" prefHeight="200.0" prefWidth="239.0" />
-            <Button fx:id="CrearProceso" layoutX="55.0" layoutY="113.0" mnemonicParsing="false" onAction="#CrearNuevoProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nuevo Proceso" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="CrearProceso" layoutX="60.0" layoutY="100.0" mnemonicParsing="false" onAction="#CrearNuevoProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Crear Nuevo Proceso" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarActividadEnProcesos" layoutX="71.0" layoutY="225.0" mnemonicParsing="false" onAction="#BuscarActividadEnProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarActividadEnProcesos" layoutX="77.0" layoutY="215.0" mnemonicParsing="false" onAction="#BuscarActividadEnProceso" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
@@ -107,7 +107,7 @@
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarTareaEnProcesos" layoutX="84.0" layoutY="284.0" mnemonicParsing="false" onAction="#BuscarTareaEnProcesos" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarTareaEnProcesos" layoutX="90.0" layoutY="270.0" mnemonicParsing="false" onAction="#BuscarTareaEnProcesos" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
@@ -160,6 +160,23 @@
                   <Font name="Playbill" size="17.0" />
                </font>
             </Button>
+            <AnchorPane fx:id="PanelListaActividadesIdenticas" layoutX="23.0" layoutY="21.0" prefHeight="349.0" prefWidth="554.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <Button fx:id="SalirListaActividadesIdenticas" layoutX="521.0" layoutY="2.0" mnemonicParsing="false" onAction="#SalirListaActividadesIdenticas" text="x" />
+                  <TableView fx:id="ListaActividadesIdenticas" layoutX="40.0" layoutY="58.0" prefHeight="218.0" prefWidth="377.0" />
+                  <TableView fx:id="ListaIdProceso" layoutX="417.0" layoutY="58.0" prefHeight="218.0" prefWidth="89.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PanelInfoTarea" layoutX="167.0" layoutY="111.0" prefHeight="218.0" prefWidth="262.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <Label fx:id="TextInfoTarea" layoutX="12.0" layoutY="23.0" prefHeight="172.0" prefWidth="254.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="Rockwell" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="SalirInfoTarea" layoutX="243.0" layoutY="11.0" mnemonicParsing="false" onAction="#SalirInfoTarea" text="x" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PanelActividades" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
@@ -174,7 +191,7 @@
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarActividad" layoutX="223.0" layoutY="307.0" mnemonicParsing="false" onAction="#BuscarActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarActividad" layoutX="224.0" layoutY="349.0" mnemonicParsing="false" onAction="#BuscarActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Actividad" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
@@ -184,7 +201,7 @@
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="BuscarTareaEnActividad" layoutX="237.0" layoutY="348.0" mnemonicParsing="false" onAction="#BuscarTareaEnActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BuscarTareaEnActividad" layoutX="398.0" layoutY="307.0" mnemonicParsing="false" onAction="#BuscarTareaEnActividad" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Buscar Tarea" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="15.0" />
                </font>
@@ -257,10 +274,20 @@
                   <Font name="Rockwell" size="10.0" />
                </font>
             </Label>
+            <Button fx:id="IntercambioActividades" layoutX="78.0" layoutY="307.0" mnemonicParsing="false" onAction="#IntercambioActividadees" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Intercambio" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PanelTareas" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">
          <children>
+            <Label layoutX="8.0" layoutY="22.0" prefHeight="13.0" prefWidth="51.0" text="Actividad :" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="10.0" />
+               </font>
+            </Label>
             <TableView fx:id="ListadoTareas" layoutX="21.0" layoutY="107.0" prefHeight="200.0" prefWidth="563.0" />
             <Label layoutX="193.0" layoutY="41.0" text="Creacion de Tareas" textFill="WHITE">
                <font>
@@ -316,6 +343,11 @@
                   <Button fx:id="SalirCreacionTareas1" layoutX="254.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirBuscadorTarea1" text="x" />
                </children>
             </AnchorPane>
+            <Label fx:id="InfoPanelTareas" layoutX="65.0" layoutY="22.0" prefHeight="13.0" prefWidth="139.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

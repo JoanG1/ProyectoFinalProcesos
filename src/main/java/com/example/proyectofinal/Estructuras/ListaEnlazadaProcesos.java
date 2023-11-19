@@ -101,6 +101,37 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return actividadesEncontradas;
     }
 
+    public ArrayList<Proceso> buscarProcesoRelacionado (String nombreActividad) {
+        ArrayList<Proceso> ProcesosPadres = new ArrayList<>();
+        Iterator<Proceso> iterator = iterator();
+
+        while (iterator.hasNext()) {
+            Proceso proceso = iterator.next();
+            ProcesosPadres.addAll(buscarProcesoDeActividad(proceso, nombreActividad));
+        }
+
+        return ProcesosPadres;
+    }
+
+
+
+    private ArrayList<Proceso> buscarProcesoDeActividad(Proceso proceso, String nombreActividad) {
+        ArrayList<Proceso> ProcesosPadres = new ArrayList<>();
+        ListaEnlazadaActividades listaActividades = proceso.getListaEnlazadaActividades();
+        Iterator<Actividad> iterator = listaActividades.iterator();
+
+        while (iterator.hasNext()) {
+            Actividad actividad = iterator.next();
+            if (actividad.getNombre().equals(nombreActividad)) {
+                System.out.println("Proceso ID: "+proceso.getId());
+                actividad.ImpresionDetalles();
+                ProcesosPadres.add(proceso);
+            }
+        }
+
+        return ProcesosPadres;
+    }
+
     public ListaEnlazadaActividades ListaDeActividadesDeProceso (String Proceso){
 
         NodoProceso Actual = Cabeza;
@@ -118,7 +149,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return null;
     }
 
-    public Tarea buscarTareaEnProceso(String Tarea){
+    public String buscarTareaEnProceso(String Tarea){
 
         Iterator<Proceso> iterator = iterator();
 
@@ -126,7 +157,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
             Proceso proceso = iterator.next();
             ListaEnlazadaActividades listaActividades = proceso.getListaEnlazadaActividades();
-            Iterator<Actividad> iteratorActividad = proceso.getListaEnlazadaActividades().iterator();
+            Iterator<Actividad> iteratorActividad = listaActividades.iterator();
             while (iteratorActividad.hasNext()){
 
                 Actividad actividad = iteratorActividad.next();
@@ -138,7 +169,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
                     Tarea tarea = iteratorTareas.next();
                     if(tarea.getDescripcion().equals(Tarea)){
                         System.out.println("Proceso Padre: "+proceso.getNombre()+"\n"+"Actividad Padre:"+proceso.getListaEnlazadaActividades().getCabeza().getActividad().getNombre()+"\n"+"Tarea: "+tarea.getDescripcion());
-                        return tarea;
+                        return "Proceso Padre: "+proceso.getNombre()+"\n"+"Actividad Padre:"+proceso.getListaEnlazadaActividades().getCabeza().getActividad().getNombre()+"\n"+"Tarea: "+tarea.getDescripcion();
                     }
                 }
 

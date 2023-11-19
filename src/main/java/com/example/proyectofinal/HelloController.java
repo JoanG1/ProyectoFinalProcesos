@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,26 +21,30 @@ public class HelloController {
     //Variables Clases
 
     private ListaEnlazadaProcesos listaProcesos = null;
-
     private ListaEnlazadaActividades listaActividades = null;
-
     private ColaTareas colaTareas = null;
     private int IdProcesos = 0;
-
     private Usuarios usuario;
 
     private LecturaUsuarios lectorUsuarios = new LecturaUsuarios();
 
     private TableColumn<Proceso, String> colNombre = new TableColumn<>("Nombre");
-    private TableColumn<Proceso, String> colApellido = new TableColumn<>("Id");
+    private TableColumn<Proceso, String> colId = new TableColumn<>("Id");
+
+    private TableColumn<Proceso, String> ColId = new TableColumn<>("Id");
 
     private TableColumn<Actividad, String> colNombreActividad = new TableColumn<>("Nombre");
     private TableColumn<Actividad, String> colDescripcionActividad = new TableColumn<>("Descripcion");
     private TableColumn<Actividad, Boolean> colObligatorio = new TableColumn<>("Obligatorio");
 
+    private TableColumn<Actividad, String> ColNombreActividad = new TableColumn<>("Nombre");
+    private TableColumn<Actividad, String> ColDescripcionActividad = new TableColumn<>("Descripcion");
+
     private TableColumn<Tarea, String> colDescripcionTarea = new TableColumn<>("Descripcion");
     private TableColumn<Tarea, Boolean> colObligatorioTarea = new TableColumn<>("Obligatorio");
     private TableColumn<Tarea, Integer> colDuracionTarea = new TableColumn<>("Duracion");
+
+    private ImportacionExcel importacion = new ImportacionExcel();
 
 
 
@@ -107,6 +113,18 @@ public class HelloController {
         private Button BusquedaTareaProceso;
         @FXML
         private Button SalirBuscarTareaProceso;
+        @FXML
+        private AnchorPane PanelListaActividadesIdenticas;
+        @FXML
+        private TableView<Actividad> ListaActividadesIdenticas;
+        @FXML
+        private TableView<Proceso> ListaIdProceso;
+        @FXML
+        private AnchorPane PanelInfoTarea;
+        @FXML
+        private Label TextInfoTarea;
+        @FXML
+        private Button SalirInfoTarea;
 
 
 
@@ -195,11 +213,11 @@ public class HelloController {
         listaProcesos = new ListaEnlazadaProcesos();
         PanelPrincipal.setVisible(false);
         PanelProcesos.setVisible(true);
-        ListaProcesos.getColumns().addAll(colNombre,colApellido);
+        ListaProcesos.getColumns().addAll(colNombre,colId);
 
         colNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         colNombre.setPrefWidth(170);
-        colApellido.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         ListaActividades.getColumns().addAll(colNombreActividad,colDescripcionActividad,colObligatorio);
 
@@ -218,6 +236,20 @@ public class HelloController {
         colObligatorioTarea.setPrefWidth(170);
         colDuracionTarea.setCellValueFactory(new PropertyValueFactory<>("Duracion"));
         colDuracionTarea.setPrefWidth(140);
+
+        ListaActividadesIdenticas.getColumns().addAll(ColNombreActividad,ColDescripcionActividad);
+
+        ColNombreActividad.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        ColNombreActividad.setPrefWidth(170);
+        ColDescripcionActividad.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        ColDescripcionActividad.setPrefWidth(200);
+
+
+
+        ListaIdProceso.getColumns().addAll(ColId);
+
+        ColId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
 
     }
     @FXML
@@ -350,9 +382,23 @@ public class HelloController {
     @FXML
     protected void BusquedaActividadProceso(){
 
+        ArrayList<Actividad> ArrayActividades = listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
+        ArrayList<Proceso> ArrayProcesos = listaProcesos.buscarProcesoRelacionado(TextFieldActividadBuscarProceso.getText());
+        ListaIdProceso.getItems().clear();
+        for (Proceso proceso: ArrayProcesos) {
 
-        listaProcesos.buscarActividad(TextFieldActividadBuscarProceso.getText());
+
+            ListaIdProceso.getItems().add(proceso);
+
+        }
+        for (Actividad actividad: ArrayActividades) {
+
+
+            ListaActividadesIdenticas.getItems().add(actividad);
+
+        }
         PanelBuscarActividadProceso.setVisible(false);
+        PanelListaActividadesIdenticas.setVisible(true);
     }
     @FXML
     protected void BuscarTareaEnProcesos (){
@@ -365,7 +411,9 @@ public class HelloController {
 
         if (!TextFieldTareaBuscarProceso.getText().isEmpty()){
 
-            listaProcesos.buscarTareaEnProceso(TextFieldTareaBuscarProceso.getText());
+            String Texto = listaProcesos.buscarTareaEnProceso(TextFieldTareaBuscarProceso.getText());
+            PanelInfoTarea.setVisible(true);
+            TextInfoTarea.setText(Texto);
             PanelBuscarTareaProceso.setVisible(false);
         }
 
@@ -395,15 +443,9 @@ public class HelloController {
                     ListaActividades.getItems().add(actividad);
                 }
 
-                //listaProcesos.ListaDeActividadesDeProceso(FiltroProceso.getText()).imprimirLista();
-
             }
 
-
         }
-
-
-
     }
     @FXML
     protected void CrearNuevaActividad (){
@@ -491,7 +533,12 @@ public class HelloController {
 
         if(!TextFieldBuscarTareaActividad.getText().isEmpty()){
             PanelBuscadorTareaActividad.setVisible(false);
-            listaActividades.buscarTareaEnActividad(TextFieldBuscarTareaActividad2.getText(),TextFieldBuscarTareaActividad.getText());
+            Tarea tarea = listaActividades.buscarTareaEnActividad(TextFieldBuscarTareaActividad2.getText(),TextFieldBuscarTareaActividad.getText());
+            PanelActividades.setVisible(true);
+            PanelTareas.setVisible(true);
+            ListadoTareas.getItems().clear();
+            ListadoTareas.getItems().add(tarea);
+
         }
     }
     @FXML
@@ -511,6 +558,9 @@ public class HelloController {
 
         PanelBuscadorActividad.setVisible(true);
 
+    }
+    @FXML
+    protected void IntercambioActividadees (){
     }
 
 
@@ -640,10 +690,11 @@ public class HelloController {
         PanelProcesos.setVisible(true);
     }
     @FXML
-    protected void AntTareas () {
+    protected void AntTareas () throws IOException {
         PanelTareas.setVisible(false);
         PanelActividades.setVisible(true);
 
+        importacion.saveProcessesInExcel("C:\\Users\\User\\OneDrive\\Escritorio\\Excel\\excel.xls",listaProcesos);
 
     }
 
@@ -701,6 +752,17 @@ public class HelloController {
     protected void SalirBuscadorTarea1 () {
         PanelBuscarTareaLista.setVisible(false);
     }
+    @FXML
+    protected void SalirListaActividadesIdenticas () {
+
+        PanelListaActividadesIdenticas.setVisible(false);
+    }
+    @FXML
+    protected void SalirInfoTarea () {
+
+        PanelInfoTarea.setVisible(false);
+    }
+
 
 
 

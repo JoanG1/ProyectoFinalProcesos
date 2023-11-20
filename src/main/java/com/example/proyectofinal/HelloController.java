@@ -1,6 +1,7 @@
 package com.example.proyectofinal;
 
 import com.example.proyectofinal.Estructuras.ColaTareas;
+import com.example.proyectofinal.Estructuras.DatosDeEscritorio;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
 import com.example.proyectofinal.LecturaUsuarios.LecturaUsuarios;
@@ -14,9 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class HelloController {
+
+    DatosDeEscritorio datos = new DatosDeEscritorio();
 
     //Variables Clases
 
@@ -210,7 +212,17 @@ public class HelloController {
     @FXML
     protected void CrearNuevoProyecto (){
 
-        listaProcesos = new ListaEnlazadaProcesos();
+        datos.llenarListas();
+        listaProcesos = datos.listaEnlazadaProcesos;
+
+        Iterator<Proceso> iterator = listaProcesos.iterator();
+
+        while(iterator.hasNext()){
+            Proceso proceso = iterator.next();
+            ListaProcesos.getItems().add(proceso);
+        }
+
+
         PanelPrincipal.setVisible(false);
         PanelProcesos.setVisible(true);
         ListaProcesos.getColumns().addAll(colNombre,colId);
@@ -253,8 +265,9 @@ public class HelloController {
 
     }
     @FXML
-    protected void ImportarProyecto (){
+    protected void ExportarProyecto () throws IOException {
 
+        importacion.saveProcessesInExcel("src/main/java/com/example/proyectofinal/ExportacionExcel/excel.xls",listaProcesos);
     }
 
     //INICIO DE SESION
@@ -704,8 +717,6 @@ public class HelloController {
     protected void AntTareas () throws IOException {
         PanelTareas.setVisible(false);
         PanelActividades.setVisible(true);
-
-        importacion.saveProcessesInExcel("C:\\Users\\User\\OneDrive\\Escritorio\\Excel\\excel.xls",listaProcesos);
 
     }
 

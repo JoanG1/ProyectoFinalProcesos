@@ -14,6 +14,7 @@ public class LecturaUsuarios {
 
     }
 
+    //metodo para guardar usuario en archivo txt
     public void guardarUsuario(Usuarios usuario) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO, true))) {
             // Escribe el usuario en el archivo
@@ -24,6 +25,7 @@ public class LecturaUsuarios {
         }
     }
 
+    //metodo para verificacion de usuario si existe
     public Usuarios buscarUsuarioPorNombre(String Id) {
         try (BufferedReader reader = new BufferedReader(new FileReader(NOMBRE_ARCHIVO))) {
             String linea;

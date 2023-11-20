@@ -20,6 +20,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
     }
 
+    // metodo para insertar dato en el final
     public void insertar(Proceso dato) {
 
             NodoProceso nuevoNodo = new NodoProceso(dato);
@@ -47,6 +48,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         System.out.println(); // Para imprimir un salto de línea al final
     }
 
+    //busca un proceso en la lista
     public Proceso BuscarProceso (String NombreProceso){
 
         NodoProceso actual = Cabeza;
@@ -73,6 +75,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return null;
     }
 
+    //metodo que devuelve un arraylist de las actividades que se buscan si hay mas de una en diferentes procesos
     public ArrayList<Actividad> buscarActividad(String nombreActividad) {
         ArrayList<Actividad> actividadesEncontradas = new ArrayList<>();
         NodoProceso actual = Cabeza;
@@ -103,6 +106,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return actividadesEncontradas;
     }
 
+    //metodo que busca el proceso relacionado con los procesos anteriores en los metodos buscarActividad() para relacionar el id de los procesos
     public ArrayList<Proceso> buscarProcesoRelacionado (String nombreActividad) {
         ArrayList<Proceso> ProcesosPadres = new ArrayList<>();
         Iterator<Proceso> iterator = iterator();
@@ -114,8 +118,6 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
 
         return ProcesosPadres;
     }
-
-
 
     private ArrayList<Proceso> buscarProcesoDeActividad(Proceso proceso, String nombreActividad) {
         ArrayList<Proceso> ProcesosPadres = new ArrayList<>();
@@ -134,6 +136,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return ProcesosPadres;
     }
 
+    //Devuelve la lista de actividades de un proceso
     public ListaEnlazadaActividades ListaDeActividadesDeProceso (String Proceso){
 
         NodoProceso Actual = Cabeza;
@@ -151,6 +154,7 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
         return null;
     }
 
+    //busca de tareas en un proceso en concreto
     public String buscarTareaEnProceso(String Tarea){
 
         Iterator<Proceso> iterator = iterator();

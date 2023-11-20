@@ -21,6 +21,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
 
     }
 
+    //metodo para insertar un dato
     public void insertar(Actividad dato) {
         NodoActividad nuevoNodo = new NodoActividad(dato);
         if (Cabeza == null) {
@@ -37,6 +38,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
     }
 
 
+    //metodo para insertar un dato desde una actividad dada
     public Boolean insertarDespuesDeActividad(Actividad nuevaActividad, String nombreNodoPrevio) {
         NodoActividad nuevoNodo = new NodoActividad(nuevaActividad);
         if (Cabeza == null) {
@@ -59,6 +61,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return true;
     }
 
+    //imprimir lista
     public void imprimirLista() {
         NodoActividad actual = Cabeza;
 
@@ -70,6 +73,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         System.out.println(); // Para imprimir un salto de línea al final
     }
 
+    //metodo ppara insertar despues del ultimo ingreso a la lista
     public void insertarDespuesDeUltimoIngreso(Actividad nuevaActividad) {
         if (UltimoIngreso == null) {
             System.out.println("El atributo 'ultimoIngreso' es nulo. No se puede realizar la inserción.");
@@ -165,6 +169,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return null;
     }
 
+    //Metodos de buscar actividad dentro de la lista dada el nombre
     public Actividad BuscarActividad (String Actividad){
 
         Iterator<Actividad> iterator = iterator();
@@ -181,6 +186,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return null;
     }
 
+    //metodo para devolver la lista de tareas de una actividad especifica
     public ColaTareas ListaDeTareasDeActividad (String Actividad) {
 
         NodoActividad Actual = Cabeza;
@@ -198,6 +204,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return null;
     }
 
+    //metodo para traer duracion maxima de actividades
     public int DuracionMaxima (){
         int DuracionMaxima = 0;
 
@@ -223,6 +230,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return DuracionMaxima;
     }
 
+    //metodo para traer duracion minima
     public int DuracionMinima (){
         int DuracionMinima = 0;
 
@@ -258,6 +266,7 @@ public class ListaEnlazadaActividades implements Iterable<Actividad> {
         return DuracionMinima;
     }
 
+    //metodo para intercambio de tareas dadas dos actividades diferentes
     public void IntercambioActividades(String Actividad1, String Actividad2){
 
        Actividad actividad1 = BuscarActividad(Actividad1);

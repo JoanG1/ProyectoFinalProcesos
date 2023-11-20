@@ -106,6 +106,7 @@ public class ColaTareas implements Iterable<Tarea> {
         return tamanio;
     }
 
+    //METODO PARA IMPRIMIR COLA
     public void imprimirCola (){
 
         NodoTarea nodoActual = nodoPrimero;
@@ -122,6 +123,7 @@ public class ColaTareas implements Iterable<Tarea> {
 
     }
 
+    //busca una tarea dentro de la cola
     public Tarea buscadorTarea (String Tarea){
 
         Iterator<Tarea> iterator = iterator();
@@ -142,6 +144,7 @@ public class ColaTareas implements Iterable<Tarea> {
     }
 
 
+    //creacion de metodo iterar
     @Override
     public Iterator<Tarea> iterator() {
         return new TareaIterator();
@@ -164,10 +167,5 @@ public class ColaTareas implements Iterable<Tarea> {
             current = current.getSiguiente();
             return tarea;
         }
-
-        // Puedes implementar el método remove si lo necesitas, pero en este caso, no lo estamos utilizando.
-        // @Override
-        // public void remove() {
-        //     throw new UnsupportedOperationException();
-    }   // }
+    }
 }

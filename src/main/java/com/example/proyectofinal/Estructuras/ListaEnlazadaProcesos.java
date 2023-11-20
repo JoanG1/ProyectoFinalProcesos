@@ -21,17 +21,19 @@ public class ListaEnlazadaProcesos implements Iterable<Proceso> {
     }
 
     public void insertar(Proceso dato) {
-        NodoProceso nuevoNodo = new NodoProceso(dato);
-        if (Cabeza == null) {
-            Cabeza = nuevoNodo;
-        } else {
-            NodoProceso NodoAux = Cabeza;
-            while (NodoAux.getSiguiente() != null) {
-                NodoAux = NodoAux.getSiguiente();
+
+            NodoProceso nuevoNodo = new NodoProceso(dato);
+            if (Cabeza == null) {
+                Cabeza = nuevoNodo;
+            } else {
+                NodoProceso NodoAux = Cabeza;
+                while (NodoAux.getSiguiente() != null) {
+                    NodoAux = NodoAux.getSiguiente();
+                }
+                NodoAux.setSiguiente(nuevoNodo);
             }
-            NodoAux.setSiguiente(nuevoNodo);
-        }
-        Tamanio++;
+            Tamanio++;
+
     }
 
     public void imprimirLista() {

@@ -173,7 +173,12 @@ public class HelloController {
             private Button BuscadorTareaActividad;
             @FXML
             private Button SalirBuscadorActividad1;
-
+        @FXML
+        private AnchorPane PanelIntercambio;
+    @FXML
+    private TextField TextFieldIntercambio;
+    @FXML
+    private TextField TextFieldIntercambio1;
 
     @FXML
     private AnchorPane PanelTareas;
@@ -578,8 +583,19 @@ public class HelloController {
     }
     @FXML
     protected void IntercambioActividadees (){
+
+        PanelIntercambio.setVisible(true);
     }
 
+    @FXML
+    protected void IntercambioActividad (){
+
+        if(!TextFieldIntercambio.getText().isEmpty()&&!TextFieldIntercambio1.getText().isEmpty()){
+            listaActividades.IntercambioActividades(TextFieldIntercambio1.getText(),TextFieldIntercambio.getText());
+            PanelIntercambio.setVisible(false);
+        }
+
+    }
 
 
 
@@ -783,6 +799,11 @@ public class HelloController {
     protected void SalirInfoTarea () {
 
         PanelInfoTarea.setVisible(false);
+    }
+    @FXML
+    protected void SalirIntercambio () {
+
+        PanelIntercambio.setVisible(false);
     }
 
 

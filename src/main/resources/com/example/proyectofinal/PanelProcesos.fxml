@@ -279,6 +279,16 @@
                   <Font name="Rockwell" size="15.0" />
                </font>
             </Button>
+            <AnchorPane fx:id="PanelIntercambio" layoutX="186.0" layoutY="151.0" prefHeight="139.0" prefWidth="253.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldIntercambio" layoutX="115.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" />
+                  <Label layoutX="14.0" layoutY="30.0" text="Actividad A" />
+                  <Button fx:id="IntercambioActividad" layoutX="53.0" layoutY="100.0" mnemonicParsing="false" onAction="#IntercambioActividad" text="Intercambiar Actividades" />
+                  <Button fx:id="SalirIntercambio" layoutX="226.0" layoutY="5.0" mnemonicParsing="false" onAction="#SalirIntercambio" text="x" />
+                  <Label layoutX="14.0" layoutY="70.0" text="Actividad B" />
+                  <TextField fx:id="TextFieldIntercambio1" layoutX="115.0" layoutY="66.0" prefHeight="26.0" prefWidth="105.0" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PanelTareas" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: white;" visible="false">

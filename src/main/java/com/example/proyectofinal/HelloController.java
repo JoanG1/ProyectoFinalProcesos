@@ -49,7 +49,7 @@ public class HelloController {
 
     private ImportacionExcel importacion = new ImportacionExcel();
 
-    private SendEmail sendEmail = new SendEmail();
+    private SendEmail sendEmail ;
 
 
 
@@ -84,6 +84,12 @@ public class HelloController {
 
     @FXML
     private AnchorPane PanelPrincipal;
+    @FXML
+    private AnchorPane PanelCorreo;
+    @FXML
+    private TextField TextFieldCorreo;
+    @FXML
+    private TextField TextFieldTiempoNotificacion;
 
 
     @FXML
@@ -217,10 +223,48 @@ public class HelloController {
 
 
     //CONFIGURACION VISTA DE LAS LISTAS
+
+    @FXML
+    protected void NuevaNotificacion (){
+
+        PanelCorreo.setVisible(true);
+
+    }
+    @FXML
+    protected void EnvioCorreo (){
+
+
+
+            String Texto = "Hay algunos de los procesos que aun tiene tareas: "+"\n";
+
+            for (Proceso proceso: listaProcesos) {
+
+                Texto += "Nombre: "+proceso.getNombre() +"\n";
+
+            }
+
+            SendEmail email = new SendEmail( Integer.parseInt(TextFieldTiempoNotificacion.getText()));
+            email.createEmail(TextFieldCorreo.getText(), "Test email subject",
+                    Texto);
+            Thread thread = new Thread(email);
+            //Sending test email
+            thread.start();
+
+
+        PanelCorreo.setVisible(false);
+
+
+
+    }
+
+
+
+
+
     @FXML
     protected void CrearNuevoProyecto (){
 
-        sendEmail.envioCorreo();
+
         datos.llenarListas();
         listaProcesos = datos.listaEnlazadaProcesos;
 

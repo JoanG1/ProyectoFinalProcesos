@@ -358,6 +358,24 @@
                   <Font name="Rockwell" size="10.0" />
                </font>
             </Label>
+            <AnchorPane fx:id="PanelCorreo" layoutX="128.0" layoutY="90.0" prefHeight="200.0" prefWidth="362.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+               <children>
+                  <TextField fx:id="TextFieldCorreo" layoutX="157.0" layoutY="41.0" />
+                  <Label layoutX="25.0" layoutY="45.0" text="Correo" />
+                  <Button fx:id="EnvioCorreo" layoutX="157.0" layoutY="133.0" mnemonicParsing="false" onAction="#EnvioCorreo" text="Crear " />
+                  <Button fx:id="SalirCrearProceso1" layoutX="331.0" layoutY="6.0" mnemonicParsing="false" onAction="#SalirCrearProceso" text="x" />
+                  <Label layoutX="25.0" layoutY="83.0" text="Tiempo de notificacion" />
+                  <TextField fx:id="TextFieldTiempoNotificacion" layoutX="157.0" layoutY="79.0" prefHeight="25.0" prefWidth="59.0" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="NuevaNotificacion" layoutX="272.0" layoutY="346.0" mnemonicParsing="false" onAction="#NuevaNotificacion" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 10px;" text="Notificaciones" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
    </children>

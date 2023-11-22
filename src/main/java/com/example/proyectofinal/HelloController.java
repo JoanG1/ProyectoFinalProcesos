@@ -5,6 +5,7 @@ import com.example.proyectofinal.Estructuras.DatosDeEscritorio;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaActividades;
 import com.example.proyectofinal.Estructuras.ListaEnlazadaProcesos;
 import com.example.proyectofinal.LecturaUsuarios.LecturaUsuarios;
+import com.example.proyectofinal.SendEmail.SendEmail;
 import com.example.proyectofinal.Usuarios.Rol;
 import com.example.proyectofinal.Usuarios.Usuarios;
 import javafx.fxml.FXML;
@@ -47,6 +48,8 @@ public class HelloController {
     private TableColumn<Tarea, Integer> colDuracionTarea = new TableColumn<>("Duracion");
 
     private ImportacionExcel importacion = new ImportacionExcel();
+
+    private SendEmail sendEmail = new SendEmail();
 
 
 
@@ -217,6 +220,7 @@ public class HelloController {
     @FXML
     protected void CrearNuevoProyecto (){
 
+        sendEmail.envioCorreo();
         datos.llenarListas();
         listaProcesos = datos.listaEnlazadaProcesos;
 
